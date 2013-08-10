@@ -27,5 +27,14 @@
         {
             this.values[name] = value;
         }
+
+        public bool Match(DynamicDocument document)
+        {
+            foreach (var key in this.values.Keys)
+                if (!this.values[key].Equals(document.GetMember(key)))
+                    return false;
+
+            return true;
+        }
     }
 }

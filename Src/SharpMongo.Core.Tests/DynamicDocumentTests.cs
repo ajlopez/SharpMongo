@@ -34,5 +34,23 @@
 
             Assert.AreEqual("Eve", document.GetMember("Name"));
         }
+
+        [TestMethod]
+        public void MatchOnePropertyQuery()
+        {
+            DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument query = new DynamicDocument("Age", 800);
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void DontMatchOnePropertyQuery()
+        {
+            DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument query = new DynamicDocument("Age", 700);
+
+            Assert.IsFalse(query.Match(document));
+        }
     }
 }
