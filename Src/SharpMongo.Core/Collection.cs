@@ -20,6 +20,13 @@
             foreach (var document in this.documents)
                 yield return document;
         }
+
+        public IEnumerable<DynamicDocument> Find(DynamicDocument query)
+        {
+            foreach (var document in this.documents)
+                if (query.Match(document))
+                    yield return document;
+        }
     }
 }
 
