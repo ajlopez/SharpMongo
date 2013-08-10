@@ -1,0 +1,3 @@
+[submodule "Obops"]
+	path = Obops
+	url = git://github.com/ajlopez/Obops.git
