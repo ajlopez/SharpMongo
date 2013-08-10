@@ -24,5 +24,15 @@
 
             Assert.AreEqual("Adam", document.GetMember("Name"));
         }
+
+        [TestMethod]
+        public void SetAndGetMember()
+        {
+            DynamicDocument document = new DynamicDocument();
+
+            document.SetMember("Name", "Eve");
+
+            Assert.AreEqual("Eve", document.GetMember("Name"));
+        }
     }
 }

@@ -12,15 +12,20 @@
         public DynamicDocument(params object[] arguments)
         {
             for (int k = 0; k < arguments.Length; k += 2)
-                values[arguments[k].ToString()] = arguments[k + 1];
+                this.values[arguments[k].ToString()] = arguments[k + 1];
         }
 
         public object GetMember(string name)
         {
-            if (values.ContainsKey(name))
-                return values[name];
+            if (this.values.ContainsKey(name))
+                return this.values[name];
 
             return null;
+        }
+
+        public void SetMember(string name, object value)
+        {
+            this.values[name] = value;
         }
     }
 }
