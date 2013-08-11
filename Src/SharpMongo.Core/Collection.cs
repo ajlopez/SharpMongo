@@ -47,12 +47,15 @@
                         yield return document;
         }
 
-        public void Update(DynamicDocument query, DynamicDocument update)
+        public void Update(DynamicDocument query, DynamicDocument update, bool multi = false)
         {
-            var document = this.Find(query).FirstOrDefault();
-
-            if (document != null)
+            foreach (var document in this.Find(query))
+            {
                 document.Update(update);
+
+                if (!multi)
+                    return;
+            }
         }
     }
 }
