@@ -46,6 +46,14 @@
                     if (query.Match(document))
                         yield return document;
         }
+
+        public void Update(DynamicDocument query, DynamicDocument update)
+        {
+            var document = this.Find(query).FirstOrDefault();
+
+            if (document != null)
+                document.Update(update);
+        }
     }
 }
 
