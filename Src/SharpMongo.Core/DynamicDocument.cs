@@ -36,5 +36,11 @@
 
             return true;
         }
+
+        public void Update(DynamicDocument document)
+        {
+            foreach (var key in document.values.Keys)
+                this.values[key] = document.values[key];
+        }
     }
 }

@@ -52,5 +52,39 @@
 
             Assert.IsFalse(query.Match(document));
         }
+
+        [TestMethod]
+        public void UpdateExistingProperty()
+        {
+            DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument update = new DynamicDocument("Age", 700);
+
+            document.Update(update);
+
+            Assert.AreEqual(700, document.GetMember("Age"));
+        }
+
+        [TestMethod]
+        public void UpdateNotExistingProperty()
+        {
+            DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument update = new DynamicDocument("Height", 180);
+
+            document.Update(update);
+
+            Assert.AreEqual(180, document.GetMember("Height"));
+        }
+
+        [TestMethod]
+        public void UpdateProperties()
+        {
+            DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument update = new DynamicDocument("Height", 180, "Age", 700);
+
+            document.Update(update);
+
+            Assert.AreEqual(180, document.GetMember("Height"));
+            Assert.AreEqual(700, document.GetMember("Age"));
+        }
     }
 }
