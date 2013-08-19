@@ -17,8 +17,9 @@
 
             collection.Insert(document);
 
-            Assert.IsNotNull(document.GetMember("Id"));
-            Assert.IsInstanceOfType(document.GetMember("Id"), typeof(Guid));
+            Assert.IsNotNull(document.Id);
+            Assert.AreEqual(document.Id, document.GetMember("Id"));
+            Assert.IsInstanceOfType(document.Id, typeof(Guid));
         }
 
         [TestMethod]
