@@ -14,9 +14,9 @@
         {
             Guid id = Guid.NewGuid();
             document.Id = id;
-            var clone = document.Clone();
-            this.documents.Add(clone);
-            this.documentsbyid[id] = clone;
+            document.Seal();
+            this.documents.Add(document);
+            this.documentsbyid[id] = document;
         }
 
         public DynamicDocument GetDocument(Guid id)
@@ -30,13 +30,13 @@
         public IEnumerable<DynamicDocument> Find()
         {
             foreach (var document in this.documents)
-                yield return document.Clone();
+                yield return document;
         }
 
         public IEnumerable<DynamicDocument> Find(DynamicObject query)
         {
             foreach (var document in this.FindDocuments(query))
-                yield return document.Clone();
+                yield return document;
         }
 
         public void Update(DynamicObject query, DynamicObject update, bool multi = false)

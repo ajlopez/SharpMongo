@@ -26,6 +26,23 @@
         }
 
         [TestMethod]
+        public void Seal()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            document.Seal();
+
+            try
+            {
+                document.SetMember("Age", 700);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+            }
+        }
+
+        [TestMethod]
         public void SetAndGetMember()
         {
             DynamicObject document = new DynamicObject();

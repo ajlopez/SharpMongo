@@ -23,21 +23,22 @@
         }
 
         [TestMethod]
-        public void InsertModifyAndGetDocument()
+        public void InsertAndModifyDocument()
         {
             Collection collection = new Collection();
             DynamicDocument document = new DynamicDocument("Name", "Adam");
 
             collection.Insert(document);
 
-            document.SetMember("Name", "Eve");
-
-            var result = collection.GetDocument((Guid)document.Id);
-
-            Assert.IsNotNull(result.Id);
-            Assert.AreEqual(result.Id, document.GetMember("Id"));
-            Assert.IsInstanceOfType(result.Id, typeof(Guid));
-            Assert.AreEqual("Adam", result.GetMember("Name"));
+            try
+            {
+                document.SetMember("Name", "Eve");
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+            }
         }
 
         [TestMethod]
@@ -48,14 +49,16 @@
 
             collection.Insert(document);
             var newdocument = collection.Find(new DynamicDocument() { Id = document.Id }).First();
-            newdocument.SetMember("Name", "Eve");
 
-            var result = collection.Find(new DynamicDocument() { Id = document.Id }).First();
-
-            Assert.IsNotNull(result.Id);
-            Assert.AreEqual(result.Id, document.GetMember("Id"));
-            Assert.IsInstanceOfType(result.Id, typeof(Guid));
-            Assert.AreEqual("Adam", result.GetMember("Name"));
+            try
+            {
+                newdocument.SetMember("Name", "Eve");
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+            }
         }
 
         [TestMethod]

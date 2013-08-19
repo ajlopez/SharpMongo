@@ -12,11 +12,6 @@
         {
         }
 
-        internal DynamicDocument(IDictionary<string, object> values)
-            : base(values)
-        {
-        }
-
         public object Id
         {
             get
@@ -28,13 +23,6 @@
             {
                 this.SetMember("Id", value);
             }
-        }
-
-        public DynamicDocument Clone()
-        {
-            var newdocument = new DynamicDocument();
-            newdocument.Update(this);
-            return newdocument;
         }
     }
 }
