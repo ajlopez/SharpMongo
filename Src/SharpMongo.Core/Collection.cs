@@ -13,7 +13,7 @@
         public void Insert(DynamicDocument document)
         {
             Guid id = Guid.NewGuid();
-            document.SetMember("Id", id);
+            document.Id = id;
             this.documents.Add(document);
             this.documentsbyid[id] = document;
         }
@@ -32,7 +32,7 @@
                 yield return document;
         }
 
-        public IEnumerable<DynamicDocument> Find(DynamicDocument query)
+        public IEnumerable<DynamicDocument> Find(DynamicObject query)
         {
             if (query.GetMember("Id") != null)
             {
@@ -47,7 +47,7 @@
                         yield return document;
         }
 
-        public void Update(DynamicDocument query, DynamicDocument update, bool multi = false)
+        public void Update(DynamicObject query, DynamicObject update, bool multi = false)
         {
             foreach (var document in this.Find(query))
             {
