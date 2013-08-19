@@ -23,6 +23,24 @@
         }
 
         [TestMethod]
+        public void InsertModifyAndFIndDocument()
+        {
+            Collection collection = new Collection();
+            DynamicDocument document = new DynamicDocument("Name", "Adam");
+
+            collection.Insert(document);
+
+            document.SetMember("Name", "Eve");
+
+            var result = collection.GetDocument((Guid)document.Id);
+
+            Assert.IsNotNull(result.Id);
+            Assert.AreEqual(result.Id, document.GetMember("Id"));
+            Assert.IsInstanceOfType(result.Id, typeof(Guid));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+        }
+
+        [TestMethod]
         public void FindOneDocument()
         {
             Collection collection = new Collection();

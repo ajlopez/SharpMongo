@@ -7,12 +7,18 @@
 
     public class DynamicObject
     {
-        private IDictionary<string, object> values = new Dictionary<string, object>();
+        protected IDictionary<string, object> values = new Dictionary<string, object>();
 
         public DynamicObject(params object[] arguments)
         {
             for (int k = 0; k < arguments.Length; k += 2)
                 this.values[arguments[k].ToString()] = arguments[k + 1];
+        }
+
+        internal DynamicObject(IDictionary<string, object> values)
+        {
+            foreach (var key in values.Keys)
+                this.values[key] = values[key];
         }
 
         public object GetMember(string name)

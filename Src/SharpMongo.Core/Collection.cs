@@ -14,8 +14,9 @@
         {
             Guid id = Guid.NewGuid();
             document.Id = id;
-            this.documents.Add(document);
-            this.documentsbyid[id] = document;
+            var clone = document.Clone();
+            this.documents.Add(clone);
+            this.documentsbyid[id] = clone;
         }
 
         public DynamicDocument GetDocument(Guid id)
