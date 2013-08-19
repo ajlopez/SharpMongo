@@ -32,7 +32,9 @@
 
         public DynamicDocument Clone()
         {
-            return new DynamicDocument(this.values);
+            var newdocument = new DynamicDocument();
+            newdocument.Update(this);
+            return newdocument;
         }
     }
 }
