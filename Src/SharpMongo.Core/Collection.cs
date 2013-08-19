@@ -30,10 +30,27 @@
         public IEnumerable<DynamicDocument> Find()
         {
             foreach (var document in this.documents)
-                yield return document;
+                yield return document.Clone();
         }
 
         public IEnumerable<DynamicDocument> Find(DynamicObject query)
+        {
+            foreach (var document in this.FindDocuments(query))
+                yield return document.Clone();
+        }
+
+        public void Update(DynamicObject query, DynamicObject update, bool multi = false)
+        {
+            foreach (var document in this.FindDocuments(query))
+            {
+                document.Update(update);
+
+                if (!multi)
+                    return;
+            }
+        }
+
+        private IEnumerable<DynamicDocument> FindDocuments(DynamicObject query)
         {
             if (query.GetMember("Id") != null)
             {
@@ -46,17 +63,6 @@
                 foreach (var document in this.documents)
                     if (query.Match(document))
                         yield return document;
-        }
-
-        public void Update(DynamicObject query, DynamicObject update, bool multi = false)
-        {
-            foreach (var document in this.Find(query))
-            {
-                document.Update(update);
-
-                if (!multi)
-                    return;
-            }
         }
     }
 }
