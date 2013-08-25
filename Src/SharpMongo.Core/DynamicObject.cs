@@ -7,7 +7,7 @@
 
     public class DynamicObject
     {
-        protected IDictionary<string, object> values = new Dictionary<string, object>();
+        private IDictionary<string, object> values = new Dictionary<string, object>();
         private bool @sealed;
 
         public DynamicObject(params object[] arguments)
