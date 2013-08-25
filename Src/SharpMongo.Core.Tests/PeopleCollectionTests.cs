@@ -87,5 +87,20 @@
             foreach (var document in result)
                 Assert.AreEqual(600, document.GetMember("Age"));
         }
+
+        [TestMethod]
+        public void FindAllWithProjection()
+        {
+            var result = this.collection.Find(null, new DynamicObject("Id", 1, "Name", 1));
+
+            Assert.AreEqual(4, result.Count());
+
+            foreach (var document in result)
+            {
+                Assert.IsNotNull(document.Id);
+                Assert.IsNotNull(document.GetMember("Name"));
+                Assert.IsNull(document.GetMember("Age"));
+            }
+        }
     }
 }

@@ -24,5 +24,15 @@
                 this.SetMember("Id", value);
             }
         }
+
+        public DynamicDocument Project(IEnumerable<string> names)
+        {
+            DynamicDocument document = new DynamicDocument();
+
+            foreach (var name in names)
+                document.SetMember(name, this.GetMember(name));
+
+            return document;
+        }
     }
 }

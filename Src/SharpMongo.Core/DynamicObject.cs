@@ -51,5 +51,10 @@
         {
             this.@sealed = true;
         }
+
+        public IEnumerable<string> GetMemberNames()
+        {
+            return this.values.Keys;
+        }
     }
 }

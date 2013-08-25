@@ -95,13 +95,26 @@
         [TestMethod]
         public void UpdateProperties()
         {
-            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800);
             DynamicObject update = new DynamicObject("Height", 180, "Age", 700);
 
-            document.Update(update);
+            obj.Update(update);
 
-            Assert.AreEqual(180, document.GetMember("Height"));
-            Assert.AreEqual(700, document.GetMember("Age"));
+            Assert.AreEqual(180, obj.GetMember("Height"));
+            Assert.AreEqual(700, obj.GetMember("Age"));
+        }
+
+        [TestMethod]
+        public void GetMemberNames()
+        {
+            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800);
+
+            var result = obj.GetMemberNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.Contains("Name"));
+            Assert.IsTrue(result.Contains("Age"));
         }
     }
 }

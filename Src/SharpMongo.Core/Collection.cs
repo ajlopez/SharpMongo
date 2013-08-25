@@ -27,21 +27,30 @@
             return this.documentsbyid[id];
         }
 
-        public IEnumerable<DynamicDocument> Find()
+        public IEnumerable<DynamicDocument> Find(DynamicObject query = null, DynamicObject projection = null)
         {
-            foreach (var document in this.documents)
-                yield return document;
-        }
+            if (projection != null)
+            {
+                IEnumerable<string> names = projection.GetMemberNames();
 
-        public IEnumerable<DynamicDocument> Find(DynamicObject query)
-        {
-            if (query == null)
-                foreach (var document in this.documents)
-                    yield return document;
+                if (query == null)
+                    foreach (var document in this.documents)
+                        yield return document.Project(names);
+                else
+                    foreach (var document in this.documents)
+                        if (query.Match(document))
+                            yield return document.Project(names);
+            }
             else
-                foreach (var document in this.documents)
-                    if (query.Match(document))
+            {
+                if (query == null)
+                    foreach (var document in this.documents)
                         yield return document;
+                else
+                    foreach (var document in this.documents)
+                        if (query.Match(document))
+                            yield return document;
+            }
         }
 
         public void Update(DynamicObject query, DynamicObject update, bool multi = false)
