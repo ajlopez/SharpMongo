@@ -117,5 +117,20 @@
                 Assert.IsNull(document.GetMember("Age"));
             }
         }
+
+        [TestMethod]
+        public void FindOneWithProjection()
+        {
+            var result = this.collection.Find(new DynamicObject("Age", 600), new DynamicObject("Id", 1, "Name", 1));
+
+            Assert.AreEqual(1, result.Count());
+
+            var document = result.First();
+
+            Assert.IsNotNull(document.Id);
+            Assert.AreEqual("Cain", document.GetMember("Name"));
+            Assert.IsNull(document.GetMember("Age"));
+            Assert.IsFalse(document.GetMemberNames().Contains("Age"));
+        }
     }
 }
