@@ -56,5 +56,36 @@
                 Assert.AreEqual("Collection 'People' already exists", ex.Message);
             }
         }
+
+        [TestMethod]
+        public void GetOrCreateCollection()
+        {
+            DocumentBase dbase = new DocumentBase("Test");
+
+            var collection = dbase.GetOrCreateCollection("People");
+
+            Assert.IsNotNull(collection);
+            Assert.AreEqual("People", collection.Name);
+
+            Assert.AreSame(collection, dbase.GetCollection("People"));
+        }
+
+        [TestMethod]
+        public void GetOrCreateCollectionTwice()
+        {
+            DocumentBase dbase = new DocumentBase("Test");
+
+            var collection = dbase.GetOrCreateCollection("People");
+
+            Assert.IsNotNull(collection);
+            Assert.AreEqual("People", collection.Name);
+
+            Assert.AreSame(collection, dbase.GetCollection("People"));
+
+            var collection2 = dbase.GetOrCreateCollection("People");
+
+            Assert.IsNotNull(collection2);
+            Assert.AreSame(collection, collection2);
+        }
     }
 }

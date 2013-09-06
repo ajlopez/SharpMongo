@@ -35,5 +35,15 @@
 
             return collection;
         }
+
+        public Collection GetOrCreateCollection(string name)
+        {
+            var collection = this.GetCollection(name);
+
+            if (collection != null)
+                return collection;
+
+            return this.CreateCollection(name);
+        }
     }
 }
