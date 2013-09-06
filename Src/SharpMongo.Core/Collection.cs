@@ -8,7 +8,7 @@
     public class Collection
     {
         private IList<DynamicDocument> documents = new List<DynamicDocument>();
-        private IDictionary<Guid, DynamicDocument> documentsbyid = new Dictionary<Guid, DynamicDocument>();
+        private IDictionary<object, DynamicDocument> documentsbyid = new Dictionary<object, DynamicDocument>();
 
         public void Insert(DynamicDocument document)
         {
@@ -61,6 +61,26 @@
 
                 if (!multi)
                     return;
+            }
+        }
+
+        public void Remove(DynamicObject query = null, bool justone = false)
+        {
+            IList<object> toremove = new List<object>();
+
+            foreach (var document in this.Find(query))
+            {
+                toremove.Add(document.Id);
+
+                if (justone)
+                    break;
+            }
+
+            foreach (var id in toremove)
+            {
+                var document = this.documentsbyid[id];
+                this.documents.Remove(document);
+                this.documentsbyid.Remove(id);
             }
         }
     }

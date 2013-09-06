@@ -132,5 +132,18 @@
             Assert.IsNull(document.GetMember("Age"));
             Assert.IsFalse(document.GetMemberNames().Contains("Age"));
         }
+
+        [TestMethod]
+        public void RemoveCain()
+        {
+            this.collection.Remove(new DynamicObject("Name", "Cain"));
+
+            var result = this.collection.Find();
+
+            Assert.AreEqual(3, result.Count());
+
+            foreach (var document in result)
+                Assert.AreNotEqual("Cain", document.GetMember("Name"));
+        }
     }
 }
