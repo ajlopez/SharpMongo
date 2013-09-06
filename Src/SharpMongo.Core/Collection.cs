@@ -19,6 +19,32 @@
             this.documentsbyid[id] = document;
         }
 
+        public void Save(DynamicDocument document)
+        {
+            DynamicDocument original = null;
+
+            if (document.Id != null && this.documentsbyid.ContainsKey(document.Id))
+                original = this.documentsbyid[document.Id];
+
+            if (original == null)
+            {
+                if (document.Id == null) {
+                    Guid id = Guid.NewGuid();
+                    document.Id = id;
+                }
+
+                document.Seal();
+                this.documents.Add(document);
+                this.documentsbyid[document.Id] = document;
+            }
+            else
+            {
+                this.documents.Remove(original);
+                this.documents.Add(document);
+                this.documentsbyid[document.Id] = document;
+            }
+        }
+
         public DynamicDocument GetDocument(Guid id)
         {
             if (!this.documentsbyid.ContainsKey(id))

@@ -23,6 +23,61 @@
         }
 
         [TestMethod]
+        public void SaveNewDocument()
+        {
+            Collection collection = new Collection();
+            DynamicDocument document = new DynamicDocument();
+
+            collection.Save(document);
+
+            Assert.IsNotNull(document.Id);
+            Assert.AreEqual(document.Id, document.GetMember("Id"));
+            Assert.IsInstanceOfType(document.Id, typeof(Guid));
+        }
+
+        [TestMethod]
+        public void SaveNewDocumentWithId()
+        {
+            Collection collection = new Collection();
+            var id = Guid.NewGuid();
+            DynamicDocument document = new DynamicDocument() { Id = id };
+
+            collection.Save(document);
+
+            var result = collection.Find(new DynamicDocument() { Id = id });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count());
+
+            var newdocument = result.First();
+            Assert.AreEqual(id, newdocument.Id);
+        }
+
+        [TestMethod]
+        public void SaveExistingDocument()
+        {
+            Collection collection = new Collection();
+            DynamicDocument original = new DynamicDocument("Name", "Adam");
+
+            collection.Insert(original);
+
+            DynamicDocument document = new DynamicDocument("Name", "New Adam", "Age", 800) { Id = original.Id };
+            collection.Save(document);
+
+            var result = collection.Find();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count());
+
+            var newdocument = result.First();
+
+            Assert.IsNotNull(newdocument);
+            Assert.AreEqual(original.Id, newdocument.Id);
+            Assert.AreEqual("New Adam", newdocument.GetMember("Name"));
+            Assert.AreEqual(800, newdocument.GetMember("Age"));
+        }
+
+        [TestMethod]
         public void InsertAndModifyDocument()
         {
             Collection collection = new Collection();
