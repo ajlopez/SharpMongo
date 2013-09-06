@@ -145,5 +145,25 @@
             foreach (var document in result)
                 Assert.AreNotEqual("Cain", document.GetMember("Name"));
         }
+
+        [TestMethod]
+        public void RemoveAll()
+        {
+            this.collection.Remove();
+
+            var result = this.collection.Find();
+
+            Assert.AreEqual(0, result.Count());
+        }
+
+        [TestMethod]
+        public void RemoveFirstOne()
+        {
+            this.collection.Remove(null, true);
+
+            var result = this.collection.Find();
+
+            Assert.AreEqual(3, result.Count());
+        }
     }
 }
