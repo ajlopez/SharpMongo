@@ -35,11 +35,11 @@
 
                 if (query == null)
                     foreach (var document in this.documents)
-                        yield return document.Project(names);
+                        yield return document.Project(projection);
                 else
                     foreach (var document in this.documents)
                         if (query.Match(document))
-                            yield return document.Project(names);
+                            yield return document.Project(projection);
             }
             else
             {
