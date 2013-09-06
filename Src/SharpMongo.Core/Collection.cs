@@ -7,8 +7,16 @@
 
     public class Collection
     {
+        private string name;
         private IList<DynamicDocument> documents = new List<DynamicDocument>();
         private IDictionary<object, DynamicDocument> documentsbyid = new Dictionary<object, DynamicDocument>();
+
+        public Collection(string name)
+        {
+            this.name = name;
+        }
+
+        public string Name { get { return this.name; } }
 
         public void Insert(DynamicDocument document)
         {

@@ -12,7 +12,7 @@
         [TestMethod]
         public void InsertDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document = new DynamicDocument();
 
             collection.Insert(document);
@@ -25,7 +25,7 @@
         [TestMethod]
         public void SaveNewDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document = new DynamicDocument();
 
             collection.Save(document);
@@ -38,7 +38,7 @@
         [TestMethod]
         public void SaveNewDocumentWithId()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             var id = Guid.NewGuid();
             DynamicDocument document = new DynamicDocument() { Id = id };
 
@@ -56,7 +56,7 @@
         [TestMethod]
         public void SaveExistingDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument original = new DynamicDocument("Name", "Adam");
 
             collection.Insert(original);
@@ -80,7 +80,7 @@
         [TestMethod]
         public void InsertAndModifyDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document = new DynamicDocument("Name", "Adam");
 
             collection.Insert(document);
@@ -99,7 +99,7 @@
         [TestMethod]
         public void FindAndModifyDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document = new DynamicDocument("Name", "Adam");
 
             collection.Insert(document);
@@ -119,7 +119,7 @@
         [TestMethod]
         public void FindOneDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
 
             collection.Insert(document);
@@ -136,7 +136,7 @@
         [TestMethod]
         public void GetDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
 
             collection.Insert(document);
@@ -153,7 +153,7 @@
         [TestMethod]
         public void GetUnknownDocument()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
 
             Assert.IsNull(collection.GetDocument(Guid.NewGuid()));
         }
@@ -161,7 +161,7 @@
         [TestMethod]
         public void FindOneDocumentUsingQuery()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
             DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
 
@@ -180,7 +180,7 @@
         [TestMethod]
         public void FindOneDocumentUsingQueryWithId()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
             DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
 
@@ -199,7 +199,7 @@
         [TestMethod]
         public void FindOneDocumentUsingQueryWithIdAndDifferentValue()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
             DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
             DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
 
@@ -214,7 +214,7 @@
         [TestMethod]
         public void FindUnknownDocumentUsingQueryWithId()
         {
-            Collection collection = new Collection();
+            Collection collection = new Collection("Test");
 
             var result = collection.Find(new DynamicDocument("Id", Guid.NewGuid()));
 

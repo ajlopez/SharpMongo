@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionTests.cs" />
+    <Compile Include="DocumentBaseTests.cs" />
     <Compile Include="DynamicDocumentTests.cs" />
     <Compile Include="DynamicObjectTests.cs" />
     <Compile Include="PeopleCollectionTests.cs" />

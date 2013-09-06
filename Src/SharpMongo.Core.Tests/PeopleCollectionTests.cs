@@ -18,7 +18,7 @@
         [TestInitialize]
         public void Setup()
         {
-            this.collection = new Collection();
+            this.collection = new Collection("People");
 
             this.adam = new DynamicDocument("Name", "Adam", "Age", 800);
             this.eve = new DynamicDocument("Name", "Eve", "Age", 700);
