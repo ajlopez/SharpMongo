@@ -88,9 +88,39 @@
         }
 
         [TestMethod]
+        public void ParseShowCollectionsCommand()
+        {
+            Parser parser = new Parser("show collections");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ShowCollectionsCommand));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseUnknownCommand()
         {
             Parser parser = new Parser("foo");
+
+            try
+            {
+                parser.ParseCommand();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Unknown command", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ParseShowAsUnknownCommand()
+        {
+            Parser parser = new Parser("show");
 
             try
             {

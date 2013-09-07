@@ -9,6 +9,7 @@
     public class Parser
     {
         private Lexer lexer;
+        private Stack<Token> tokens = new Stack<Token>();
 
         public Parser(string text)
         {
@@ -26,12 +27,16 @@
             {
                 if (token.Value == "exit")
                     return new ExitCommand();
+
                 if (token.Value == "use")
                     return new UseCommand(this.ParseName());
+
                 if (token.Value == "show")
                 {
                     if (this.TryParseName("dbs"))
                         return new ShowDbsCommand();
+                    if (this.TryParseName("collections"))
+                        return new ShowCollectionsCommand();
                 }
             }
 
@@ -43,7 +48,10 @@
             Token token = this.NextToken();
 
             if (token == null || token.Type != TokenType.Name || token.Value != name)
+            {
+                this.PushToken(token);
                 return false;
+            }
 
             return true;
         }
@@ -58,8 +66,16 @@
             return token.Value;
         }
 
+        private void PushToken(Token token)
+        {
+            this.tokens.Push(token);
+        }
+
         private Token NextToken()
         {
+            if (this.tokens.Count > 0)
+                return this.tokens.Pop();
+
             return this.lexer.NextToken();
         }
     }
