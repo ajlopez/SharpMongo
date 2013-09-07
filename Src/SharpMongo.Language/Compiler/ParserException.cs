@@ -5,9 +5,11 @@
     using System.Linq;
     using System.Text;
 
-    public enum TokenType
+    public class ParserException : Exception
     {
-        Name = 1,
-        Punctuation = 2
+        public ParserException(string message)
+            : base(message)
+        {
+        }
     }
 }

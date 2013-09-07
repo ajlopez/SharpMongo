@@ -7,6 +7,8 @@
 
     public class Lexer
     {
+        private static string punctuations = "();{}:";
+
         private string text;
         private int length;
         private int position;
@@ -14,7 +16,7 @@
         public Lexer(string text)
         {
             this.text = text;
-            this.length = text.Length;
+            this.length = text == null ? 0 : text.Length;
             this.position = 0;
         }
 
@@ -26,7 +28,12 @@
             if (this.position >= this.length)
                 return null;
 
-            string result = this.text[this.position++].ToString();
+            char ch = this.text[this.position++];
+
+            string result = ch.ToString();
+
+            if (punctuations.Contains(ch))
+                return new Token(result, TokenType.Punctuation);
 
             while (this.position < this.length && !char.IsWhiteSpace(this.text[this.position]))
                 result += this.text[this.position++];

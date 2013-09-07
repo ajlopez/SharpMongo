@@ -26,6 +26,7 @@
             <CodeCoverage xmlns="">
               <Regular>
                 <CodeCoverageItem binaryFile="SharpMongo.Core\bin\Debug\SharpMongo.Core.dll" pdbFile="SharpMongo.Core\bin\Debug\SharpMongo.Core.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="SharpMongo.Language\bin\Debug\SharpMongo.Language.dll" pdbFile="SharpMongo.Language\bin\Debug\SharpMongo.Language.pdb" instrumentInPlace="true" />
               </Regular>
             </CodeCoverage>
           </Configuration>
