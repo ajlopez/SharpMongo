@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ShowDbsCommand.cs" />
     <Compile Include="Commands\UseCommand.cs" />
     <Compile Include="Compiler\Lexer.cs" />
     <Compile Include="Compiler\Parser.cs" />

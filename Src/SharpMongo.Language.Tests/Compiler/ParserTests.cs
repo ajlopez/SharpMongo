@@ -75,6 +75,19 @@
         }
 
         [TestMethod]
+        public void ParseShowDbsCommand()
+        {
+            Parser parser = new Parser("show dbs");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ShowDbsCommand));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseUnknownCommand()
         {
             Parser parser = new Parser("foo");

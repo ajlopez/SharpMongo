@@ -28,9 +28,24 @@
                     return new ExitCommand();
                 if (token.Value == "use")
                     return new UseCommand(this.ParseName());
+                if (token.Value == "show")
+                {
+                    if (this.TryParseName("dbs"))
+                        return new ShowDbsCommand();
+                }
             }
 
             throw new ParserException("Unknown command");
+        }
+
+        private bool TryParseName(string name)
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.Name || token.Value != name)
+                return false;
+
+            return true;
         }
 
         private string ParseName()
