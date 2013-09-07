@@ -49,6 +49,7 @@
     <Compile Include="DocumentBaseTests.cs" />
     <Compile Include="DynamicDocumentTests.cs" />
     <Compile Include="DynamicObjectTests.cs" />
+    <Compile Include="EngineTests.cs" />
     <Compile Include="PeopleCollectionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

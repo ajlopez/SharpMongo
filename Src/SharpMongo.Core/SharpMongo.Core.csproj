@@ -44,6 +44,7 @@
     <Compile Include="DocumentBase.cs" />
     <Compile Include="DynamicObject.cs" />
     <Compile Include="DynamicDocument.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
