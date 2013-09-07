@@ -1,0 +1,24 @@
+<stylecopresultscache>
+  <version>10</version>
+  <project key="1302139209">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="LexerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/07/2013 12:13:59</timestamp>
+    <milliseconds>353</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/07/2013 12:02:33</timestamp>
+    <milliseconds>717</milliseconds>
+    <violations />
+  </sourcecode>
+</stylecopresultscache>
