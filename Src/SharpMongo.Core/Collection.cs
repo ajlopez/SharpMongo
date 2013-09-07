@@ -36,7 +36,8 @@
 
             if (original == null)
             {
-                if (document.Id == null) {
+                if (document.Id == null) 
+                {
                     Guid id = Guid.NewGuid();
                     document.Id = id;
                 }

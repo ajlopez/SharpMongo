@@ -7,7 +7,7 @@
 
     public class Engine
     {
-        IDictionary<string, DocumentBase> dbases = new Dictionary<string, DocumentBase>();
+        private IDictionary<string, DocumentBase> dbases = new Dictionary<string, DocumentBase>();
 
         public DocumentBase GetDocumentBase(string name)
         {
