@@ -41,6 +41,40 @@
         }
 
         [TestMethod]
+        public void ParseUseCommand()
+        {
+            Parser parser = new Parser("use genesis");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(UseCommand));
+
+            var command = (UseCommand)result;
+
+            Assert.AreEqual("genesis", command.Name);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseUseCommandWithoutName()
+        {
+            Parser parser = new Parser("use");
+
+            try
+            {
+                parser.ParseCommand();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Name expected", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void ParseUnknownCommand()
         {
             Parser parser = new Parser("foo");
