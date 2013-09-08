@@ -46,6 +46,16 @@
 
         public IExpression ParseExpression()
         {
+            IExpression expr = this.ParseTerm();
+
+            while (this.TryParseToken(".", TokenType.Punctuation))
+                expr = new DotExpression(expr, this.ParseName());
+
+            return expr;
+        }
+
+        private IExpression ParseTerm()
+        {
             Token token = this.NextToken();
 
             if (token == null)
@@ -71,6 +81,19 @@
             Token token = this.NextToken();
 
             if (token == null || token.Type != TokenType.Name || token.Value != name)
+            {
+                this.PushToken(token);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool TryParseToken(string value, TokenType type)
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != type || token.Value != value)
             {
                 this.PushToken(token);
                 return false;

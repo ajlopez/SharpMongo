@@ -61,7 +61,7 @@
         [TestMethod]
         public void GetPunctuations()
         {
-            string punctuations = "();{}:";
+            string punctuations = "();{}:,.";
             Lexer lexer = new Lexer(punctuations);
 
             for (var k = 0; k < punctuations.Length; k++)
@@ -72,6 +72,32 @@
                 Assert.AreEqual(punctuations[k], result.Value[0]);
                 Assert.AreEqual(TokenType.Punctuation, result.Type);
             }
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetNameDotName()
+        {
+            Lexer lexer = new Lexer("db.foo");
+
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("db", result.Value);
+            Assert.AreEqual(TokenType.Name, result.Type);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(".", result.Value);
+            Assert.AreEqual(TokenType.Punctuation, result.Type);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo", result.Value);
+            Assert.AreEqual(TokenType.Name, result.Type);
 
             Assert.IsNull(lexer.NextToken());
         }

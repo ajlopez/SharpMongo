@@ -7,7 +7,7 @@
 
     public class Lexer
     {
-        private static string punctuations = "();{}:";
+        private static string punctuations = "();{}:,.";
 
         private string text;
         private int length;
@@ -41,12 +41,20 @@
             if (punctuations.Contains(ch))
                 return new Token(result, TokenType.Punctuation);
 
-            while (this.position < this.length && !char.IsWhiteSpace(this.text[this.position]))
+            if (char.IsLetter(ch))
+                return this.NextName(ch);
+
+            throw new ParserException(string.Format("Unexpected '{0}'", ch));
+        }
+
+        private Token NextName(char letter)
+        {
+            string result = letter.ToString();
+
+            while (this.position < this.length && char.IsLetter(this.text[this.position]))
                 result += this.text[this.position++];
 
-            var token = new Token(result, TokenType.Name);
-
-            return token;
+            return new Token(result, TokenType.Name);
         }
 
         private Token NextInteger(char digit)

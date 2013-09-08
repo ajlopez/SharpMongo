@@ -229,5 +229,25 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseDotExpression()
+        {
+            Parser parser = new Parser("db.foo");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DotExpression));
+
+            var expr = (DotExpression)result;
+
+            Assert.AreEqual("foo", expr.Name);
+            Assert.IsNotNull(expr.Expression);
+            Assert.IsInstanceOfType(expr.Expression, typeof(NameExpression));
+            Assert.AreEqual("db", ((NameExpression)expr.Expression).Name);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }
