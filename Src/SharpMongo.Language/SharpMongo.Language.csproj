@@ -61,6 +61,7 @@
     <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Expressions\ObjectExpression.cs" />
+    <Compile Include="IFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

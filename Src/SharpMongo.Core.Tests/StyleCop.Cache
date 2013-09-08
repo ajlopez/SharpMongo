@@ -45,13 +45,16 @@
     <milliseconds>895</milliseconds>
     <violations />
   </sourcecode>
+  <project key="1875141538">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="DocumentBaseTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:32:22</timestamp>
       <milliseconds>879</milliseconds>
     </settings>
-    <timestamp>09/07/2013 19:22:13</timestamp>
-    <milliseconds>889</milliseconds>
+    <timestamp>09/08/2013 17:42:38</timestamp>
+    <milliseconds>25</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="EngineTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -59,11 +62,8 @@
       <timestamp>08/10/2013 20:32:22</timestamp>
       <milliseconds>879</milliseconds>
     </settings>
-    <timestamp>09/07/2013 19:22:13</timestamp>
-    <milliseconds>902</milliseconds>
+    <timestamp>09/08/2013 17:13:33</timestamp>
+    <milliseconds>686</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1875141538">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
 </stylecopresultscache>

@@ -45,6 +45,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionObjectTests.cs" />
     <Compile Include="Commands\ExpressionCommandTests.cs" />
     <Compile Include="Commands\ShowCollectionsCommandTests.cs" />
     <Compile Include="Commands\ShowDbsCommandTests.cs" />

@@ -108,7 +108,7 @@
                 IList<string> names = new List<string>();
                 IList<IExpression> expressions = new List<IExpression>();
 
-                while (!TryParseToken("}", TokenType.Punctuation))
+                while (!this.TryParseToken("}", TokenType.Punctuation))
                 {
                     if (names.Count > 0)
                         this.ParseToken(",", TokenType.Punctuation);
@@ -135,7 +135,7 @@
             {
                 IList<IExpression> expressions = new List<IExpression>();
 
-                while (!TryParseToken("]", TokenType.Punctuation))
+                while (!this.TryParseToken("]", TokenType.Punctuation))
                 {
                     if (expressions.Count > 0)
                         this.ParseToken(",", TokenType.Punctuation);

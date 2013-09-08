@@ -12,13 +12,40 @@
   <project key="1302139209">
     <configuration>DEBUG;TRACE</configuration>
   </project>
-  <sourcecode name="ParserTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+  <sourcecode name="ExpressionCommandTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>09/07/2013 19:22:43</timestamp>
       <milliseconds>473</milliseconds>
     </settings>
-    <timestamp>09/08/2013 08:28:06</timestamp>
-    <milliseconds>114</milliseconds>
+    <timestamp>09/08/2013 18:22:26</timestamp>
+    <milliseconds>408</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ShowCollectionsCommandTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 17:34:04</timestamp>
+    <milliseconds>399</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ShowDbsCommandTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 17:05:52</timestamp>
+    <milliseconds>299</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="UseCommandTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 18:40:28</timestamp>
+    <milliseconds>461</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="LexerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -26,8 +53,123 @@
       <timestamp>09/07/2013 19:22:43</timestamp>
       <milliseconds>473</milliseconds>
     </settings>
-    <timestamp>09/08/2013 08:36:51</timestamp>
-    <milliseconds>749</milliseconds>
+    <timestamp>09/08/2013 16:31:03</timestamp>
+    <milliseconds>693</milliseconds>
     <violations />
+  </sourcecode>
+  <sourcecode name="ParserTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 18:24:28</timestamp>
+    <milliseconds>219</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
+        <context>The call to ParseExpressionWithException must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
+        <line>412</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
+        <context>The call to ParseExpressionWithException must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
+        <line>413</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="DbObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 18:37:12</timestamp>
+    <milliseconds>235</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>4</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ConstantExpressionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 18:09:48</timestamp>
+    <milliseconds>439</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>4</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ArrayExpressionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 18:18:18</timestamp>
+    <milliseconds>432</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>4</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="DotExpressionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 18:15:07</timestamp>
+    <milliseconds>748</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>4</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="NameExpressionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 17:56:59</timestamp>
+    <milliseconds>861</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>4</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ObjectExpressionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:22:43</timestamp>
+      <milliseconds>473</milliseconds>
+    </settings>
+    <timestamp>09/08/2013 18:12:37</timestamp>
+    <milliseconds>935</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>4</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>8</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
 </stylecopresultscache>

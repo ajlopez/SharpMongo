@@ -409,8 +409,8 @@
         [TestMethod]
         public void ParseBadObject()
         {
-            ParseExpressionWithException("{ 123: 123 }", "Name expected");
-            ParseExpressionWithException("{ Name 123 }", "Expected ':'");
+            this.ParseExpressionWithException("{ 123: 123 }", "Name expected");
+            this.ParseExpressionWithException("{ Name 123 }", "Expected ':'");
         }
 
         [TestMethod]
