@@ -45,6 +45,7 @@
     <Compile Include="DynamicObject.cs" />
     <Compile Include="DynamicDocument.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="IObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

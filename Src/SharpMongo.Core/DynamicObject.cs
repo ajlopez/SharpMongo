@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public class DynamicObject
+    public class DynamicObject : SharpMongo.Core.IObject
     {
         private IDictionary<string, object> values = new Dictionary<string, object>();
         private bool @sealed;
