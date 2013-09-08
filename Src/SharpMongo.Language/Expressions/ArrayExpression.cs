@@ -18,7 +18,12 @@
 
         public object Evaluate(Context context)
         {
-            throw new NotImplementedException();
+            IList<object> result = new List<object>();
+
+            foreach (var expression in this.expressions)
+                result.Add(expression.Evaluate(context));
+
+            return result;
         }
     }
 }
