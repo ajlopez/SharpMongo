@@ -7,13 +7,18 @@
 
     public class DynamicObject : SharpMongo.Core.IObject
     {
+        private IList<string> names = new List<string>();
         private IDictionary<string, object> values = new Dictionary<string, object>();
         private bool @sealed;
 
         public DynamicObject(params object[] arguments)
         {
             for (int k = 0; k < arguments.Length; k += 2)
-                this.values[arguments[k].ToString()] = arguments[k + 1];
+            {
+                var name = arguments[k].ToString();
+                this.names.Add(name);
+                this.values[name] = arguments[k + 1];
+            }
         }
 
         public virtual object GetMember(string name)
@@ -28,6 +33,9 @@
         {
             if (this.@sealed)
                 throw new InvalidOperationException();
+
+            if (!this.names.Contains(name))
+                this.names.Add(name);
 
             this.values[name] = value;
         }
@@ -54,7 +62,7 @@
 
         public IEnumerable<string> GetMemberNames()
         {
-            return this.values.Keys;
+            return this.names;
         }
     }
 }

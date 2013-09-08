@@ -107,14 +107,15 @@
         [TestMethod]
         public void GetMemberNames()
         {
-            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800, "Wife", "Eve" );
 
-            var result = obj.GetMemberNames();
+            var result = obj.GetMemberNames().ToList();
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.IsTrue(result.Contains("Name"));
-            Assert.IsTrue(result.Contains("Age"));
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("Name", result[0]);
+            Assert.AreEqual("Age", result[1]);
+            Assert.AreEqual("Wife", result[2]);
         }
     }
 }
