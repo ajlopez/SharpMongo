@@ -50,7 +50,10 @@
     <Compile Include="Commands\UseCommandTests.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
+    <Compile Include="Expressions\ConstantExpressionTests.cs" />
+    <Compile Include="Expressions\DotExpressionTests.cs" />
     <Compile Include="Expressions\NameExpressionTests.cs" />
+    <Compile Include="Expressions\ObjectExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

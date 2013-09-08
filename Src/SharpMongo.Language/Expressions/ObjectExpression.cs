@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using SharpMongo.Core;
 
     public class ObjectExpression : IExpression
     {
@@ -19,5 +20,16 @@
         public IEnumerable<string> Names { get { return this.names; } }
 
         public IEnumerable<IExpression> Expressions { get { return this.expressions; } }
+
+        public object Evaluate(Context context)
+        {
+            DynamicObject dobj = new DynamicObject();
+            int k = 0;
+
+            foreach (var name in this.names)
+                dobj.SetMember(name, this.expressions[k++].Evaluate(context));
+
+            return dobj;
+        }
     }
 }

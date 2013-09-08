@@ -19,5 +19,10 @@
         public IExpression Expression { get { return this.expression; } }
 
         public IEnumerable<IExpression> Arguments { get { return this.arguments; } }
+
+        public object Evaluate(Context context)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

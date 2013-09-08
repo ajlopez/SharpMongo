@@ -15,5 +15,10 @@
         }
 
         public IEnumerable<IExpression> Expressions { get { return this.expressions; } }
+
+        public object Evaluate(Context context)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
