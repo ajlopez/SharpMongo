@@ -296,6 +296,29 @@
         }
 
         [TestMethod]
+        public void ParseCallExpressionWithTwoArguments()
+        {
+            Parser parser = new Parser("help(1, 2)");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CallExpression));
+
+            var expr = (CallExpression)result;
+
+            Assert.IsNotNull(expr.Expression);
+            Assert.IsInstanceOfType(expr.Expression, typeof(NameExpression));
+            Assert.IsNotNull(expr.Arguments);
+            Assert.AreEqual(2, expr.Arguments.Count());
+            Assert.IsInstanceOfType(expr.Arguments.First(), typeof(ConstantExpression));
+            Assert.IsInstanceOfType(expr.Arguments.Skip(1).First(), typeof(ConstantExpression));
+            Assert.AreEqual("help", ((NameExpression)expr.Expression).Name);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseDotCallExpression()
         {
             Parser parser = new Parser("db.foo.find()");

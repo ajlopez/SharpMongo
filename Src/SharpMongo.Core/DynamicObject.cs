@@ -16,7 +16,7 @@
                 this.values[arguments[k].ToString()] = arguments[k + 1];
         }
 
-        public object GetMember(string name)
+        public virtual object GetMember(string name)
         {
             if (this.values.ContainsKey(name))
                 return this.values[name];
@@ -24,7 +24,7 @@
             return null;
         }
 
-        public void SetMember(string name, object value)
+        public virtual void SetMember(string name, object value)
         {
             if (this.@sealed)
                 throw new InvalidOperationException();

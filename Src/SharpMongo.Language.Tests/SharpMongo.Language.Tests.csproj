@@ -51,6 +51,7 @@
     <Compile Include="Commands\UseCommandTests.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
+    <Compile Include="DbObjectTests.cs" />
     <Compile Include="Expressions\ArrayExpressionTests.cs" />
     <Compile Include="Expressions\ConstantExpressionTests.cs" />
     <Compile Include="Expressions\DotExpressionTests.cs" />
