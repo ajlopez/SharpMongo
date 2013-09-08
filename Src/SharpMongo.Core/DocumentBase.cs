@@ -45,5 +45,12 @@
 
             return this.CreateCollection(name);
         }
+
+        public ICollection<string> GetCollectionNames()
+        {
+            string[] names = this.collections.Keys.ToArray();
+            Array.Sort(names);
+            return names;
+        }
     }
 }

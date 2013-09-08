@@ -87,5 +87,21 @@
             Assert.IsNotNull(collection2);
             Assert.AreSame(collection, collection2);
         }
+
+        [TestMethod]
+        public void GetCollectionNames()
+        {
+            DocumentBase dbase = new DocumentBase("Test");
+
+            dbase.CreateCollection("People");
+            dbase.CreateCollection("Assets");
+
+            var result = dbase.GetCollectionNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Assets", result.First());
+            Assert.AreEqual("People", result.Skip(1).First());
+        }
     }
 }

@@ -7,5 +7,12 @@
 
     public class ShowCollectionsCommand : ICommand
     {
+        public object Execute(Context context)
+        {
+            if (context.DocumentBase == null)
+                return new string[] { };
+
+            return context.DocumentBase.GetCollectionNames().ToList();
+        }
     }
 }
