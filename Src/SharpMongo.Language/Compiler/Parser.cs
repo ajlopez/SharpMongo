@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using SharpMongo.Language.Commands;
+    using SharpMongo.Language.Expressions;
 
     public class Parser
     {
@@ -41,6 +42,19 @@
             }
 
             throw new ParserException("Unknown command");
+        }
+
+        public IExpression ParseExpression()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return null;
+
+            if (token.Type == TokenType.Name)
+                return new NameExpression(token.Value);
+
+            throw new ParserException("Syntax error");
         }
 
         private bool TryParseName(string name)

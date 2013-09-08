@@ -1,12 +1,13 @@
 ﻿namespace SharpMongo.Language.Tests.Compiler
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpMongo.Language.Compiler;
     using SharpMongo.Language.Commands;
+    using SharpMongo.Language.Compiler;
+    using SharpMongo.Language.Expressions;
 
     [TestClass]
     public class ParserTests
@@ -131,6 +132,50 @@
             {
                 Assert.IsInstanceOfType(ex, typeof(ParserException));
                 Assert.AreEqual("Unknown command", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ParseNameExpression()
+        {
+            Parser parser = new Parser("db");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NameExpression));
+
+            var expr = (NameExpression)result;
+
+            Assert.AreEqual("db", expr.Name);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseNullExpression()
+        {
+            Parser parser = new Parser(string.Empty);
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void ParseSyntaxErrorInExpression()
+        {
+            Parser parser = new Parser("}");
+
+            try
+            {
+                parser.ParseExpression();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Syntax error", ex.Message);
             }
         }
     }
