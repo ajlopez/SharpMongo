@@ -22,7 +22,13 @@
 
         public object Evaluate(Context context)
         {
-            throw new NotImplementedException();
+            IFunction fn = (IFunction)this.expression.Evaluate(context);
+            IList<object> arguments = new List<object>();
+
+            foreach (var arg in this.arguments)
+                arguments.Add(arg.Evaluate(context));
+
+            return fn.Apply(arguments);
         }
     }
 }
