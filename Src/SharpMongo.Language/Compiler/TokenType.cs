@@ -8,6 +8,7 @@
     public enum TokenType
     {
         Name = 1,
-        Punctuation = 2
+        String = 2,
+        Punctuation = 3
     }
 }

@@ -30,6 +30,9 @@
 
             char ch = this.text[this.position++];
 
+            if (ch == '"' || ch == '\'')
+                return NextString(ch);
+
             string result = ch.ToString();
 
             if (punctuations.Contains(ch))
@@ -41,6 +44,21 @@
             var token = new Token(result, TokenType.Name);
 
             return token;
+        }
+
+        private Token NextString(char delimiter)
+        {
+            string result = string.Empty;
+
+            while (this.position < this.length && this.text[this.position] != delimiter)
+                result += this.text[this.position++];
+
+            if (this.position >= this.length)
+                throw new ParserException("Unclosed string");
+
+            this.position++;
+
+            return new Token(result, TokenType.String);
         }
     }
 }
