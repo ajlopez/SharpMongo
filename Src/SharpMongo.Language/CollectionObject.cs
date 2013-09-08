@@ -14,9 +14,25 @@
         {
             this.collection = collection;
             this.SetMember("insert", new InsertMethod(this));
+            this.SetMember("find", new FindMethod(this));
         }
 
         public Collection Collection { get { return this.collection; } }
+
+        private class FindMethod : IFunction
+        {
+            private CollectionObject self;
+
+            public FindMethod(CollectionObject self)
+            {
+                this.self = self;
+            }
+
+            public object Apply(IList<object> arguments)
+            {
+                return this.self.Collection.Find();
+            }
+        }
 
         private class InsertMethod : IFunction
         {
