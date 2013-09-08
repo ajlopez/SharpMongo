@@ -15,5 +15,11 @@
         }
 
         public string Name { get { return this.name; } }
+
+        public object Execute(Context context)
+        {
+            context.DocumentBase = context.Engine.GetOrCreateDocumentBase(this.name);
+            return null;
+        }
     }
 }

@@ -9,5 +9,7 @@
     public class Context
     {
         public Engine Engine { get; set; }
+
+        public DocumentBase DocumentBase { get; set; }
     }
 }

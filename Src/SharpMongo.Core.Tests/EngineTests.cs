@@ -62,6 +62,24 @@
         }
 
         [TestMethod]
+        public void GetOrCreateDocumentBase()
+        {
+            Engine engine = new Engine();
+
+            var dbase = engine.GetOrCreateDocumentBase("Genesis");
+
+            var result = engine.GetDocumentBase("Genesis");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Genesis", result.Name);
+            Assert.AreSame(dbase, result);
+
+            var result2 = engine.GetOrCreateDocumentBase("Genesis");
+
+            Assert.AreSame(result, result2);
+        }
+
+        [TestMethod]
         public void GetDocumentBaseNames()
         {
             Engine engine = new Engine();

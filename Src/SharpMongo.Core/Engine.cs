@@ -17,6 +17,14 @@
             return null;
         }
 
+        public DocumentBase GetOrCreateDocumentBase(string name)
+        {
+            if (this.dbases.ContainsKey(name))
+                return this.dbases[name];
+
+            return this.CreateDocumentBase(name);
+        }
+
         public DocumentBase CreateDocumentBase(string name)
         {
             if (this.dbases.ContainsKey(name))
