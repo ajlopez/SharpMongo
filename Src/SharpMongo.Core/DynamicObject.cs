@@ -64,5 +64,37 @@
         {
             return this.names;
         }
+
+        public string ToJsonString()
+        {
+            if (this.names.Count == 0)
+                return "{ }";
+
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append("{ ");
+
+            int count = 0;
+
+            foreach (string name in this.names)
+            {
+                if (count > 0)
+                    builder.Append(", ");
+
+                count++;
+
+                builder.Append(string.Format("\"{0}\": ", name));
+                object value = this.values[name];
+
+                if (value is string)
+                    builder.Append(string.Format("\"{0}\"", value));
+                else
+                    builder.Append(value);
+            }
+
+            builder.Append(" }");
+
+            return builder.ToString();
+        }
     }
 }
