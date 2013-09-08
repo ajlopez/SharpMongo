@@ -102,23 +102,6 @@
         }
 
         [TestMethod]
-        public void ParseUnknownCommand()
-        {
-            Parser parser = new Parser("foo");
-
-            try
-            {
-                parser.ParseCommand();
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                Assert.IsInstanceOfType(ex, typeof(ParserException));
-                Assert.AreEqual("Unknown command", ex.Message);
-            }
-        }
-
-        [TestMethod]
         public void ParseShowAsUnknownCommand()
         {
             Parser parser = new Parser("show");
@@ -133,6 +116,25 @@
                 Assert.IsInstanceOfType(ex, typeof(ParserException));
                 Assert.AreEqual("Unknown command", ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void ParseSimpleExpressionCommand()
+        {
+            Parser parser = new Parser("123");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
+
+            var command = (ExpressionCommand)result;
+
+            Assert.IsNotNull(command.Expression);
+            Assert.IsInstanceOfType(command.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(123, ((ConstantExpression)command.Expression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
         }
 
         [TestMethod]

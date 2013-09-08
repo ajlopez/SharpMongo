@@ -36,12 +36,17 @@
                 {
                     if (this.TryParseName("dbs"))
                         return new ShowDbsCommand();
+
                     if (this.TryParseName("collections"))
                         return new ShowCollectionsCommand();
+
+                    throw new ParserException("Unknown command");
                 }
             }
 
-            throw new ParserException("Unknown command");
+            this.PushToken(token);
+
+            return new ExpressionCommand(this.ParseExpression());
         }
 
         public IExpression ParseExpression()
