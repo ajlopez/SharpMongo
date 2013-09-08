@@ -36,9 +36,6 @@
     <milliseconds>88</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1875141538">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="DynamicDocumentTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:32:22</timestamp>
@@ -66,4 +63,7 @@
     <milliseconds>902</milliseconds>
     <violations />
   </sourcecode>
+  <project key="1875141538">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>
