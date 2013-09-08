@@ -266,6 +266,47 @@
             Assert.IsInstanceOfType(expr.Expression, typeof(NameExpression));
             Assert.IsNotNull(expr.Arguments);
             Assert.AreEqual(0, expr.Arguments.Count);
+            Assert.AreEqual("help", ((NameExpression)expr.Expression).Name);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseDotCallExpression()
+        {
+            Parser parser = new Parser("db.foo.find()");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CallExpression));
+
+            var expr = (CallExpression)result;
+
+            Assert.IsNotNull(expr.Expression);
+            Assert.IsInstanceOfType(expr.Expression, typeof(DotExpression));
+            Assert.IsNotNull(expr.Arguments);
+            Assert.AreEqual(0, expr.Arguments.Count);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseDotCallDotCallExpression()
+        {
+            Parser parser = new Parser("db.foo().find()");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CallExpression));
+
+            var expr = (CallExpression)result;
+
+            Assert.IsNotNull(expr.Expression);
+            Assert.IsInstanceOfType(expr.Expression, typeof(DotExpression));
+            Assert.IsNotNull(expr.Arguments);
+            Assert.AreEqual(0, expr.Arguments.Count);
 
             Assert.IsNull(parser.ParseExpression());
         }

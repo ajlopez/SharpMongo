@@ -48,22 +48,32 @@
         {
             IExpression expr = this.ParseTerm();
 
-            while (this.TryParseToken(".", TokenType.Punctuation))
-                expr = new DotExpression(expr, this.ParseName());
-
-            while (this.TryParseToken("(", TokenType.Punctuation))
+            while (true)
             {
-                IList<IExpression> exprs = new List<IExpression>();
-
-                while (!this.TryParseToken(")", TokenType.Punctuation))
+                if (this.TryParseToken(".", TokenType.Punctuation))
                 {
-                    if (exprs.Count > 0)
-                        this.ParseToken(",", TokenType.Punctuation);
-
-                    exprs.Add(this.ParseExpression());
+                    expr = new DotExpression(expr, this.ParseName());
+                    continue;
                 }
 
-                return new CallExpression(expr, exprs);
+                if (this.TryParseToken("(", TokenType.Punctuation))
+                {
+                    IList<IExpression> exprs = new List<IExpression>();
+
+                    while (!this.TryParseToken(")", TokenType.Punctuation))
+                    {
+                        if (exprs.Count > 0)
+                            this.ParseToken(",", TokenType.Punctuation);
+
+                        exprs.Add(this.ParseExpression());
+                    }
+
+                    expr = new CallExpression(expr, exprs);
+
+                    continue;
+                }
+
+                break;
             }
 
             return expr;
