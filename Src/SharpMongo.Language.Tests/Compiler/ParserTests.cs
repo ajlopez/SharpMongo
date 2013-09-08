@@ -265,7 +265,29 @@
             Assert.IsNotNull(expr.Expression);
             Assert.IsInstanceOfType(expr.Expression, typeof(NameExpression));
             Assert.IsNotNull(expr.Arguments);
-            Assert.AreEqual(0, expr.Arguments.Count);
+            Assert.AreEqual(0, expr.Arguments.Count());
+            Assert.AreEqual("help", ((NameExpression)expr.Expression).Name);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseCallExpressionWithOneArgument()
+        {
+            Parser parser = new Parser("help(1)");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CallExpression));
+
+            var expr = (CallExpression)result;
+
+            Assert.IsNotNull(expr.Expression);
+            Assert.IsInstanceOfType(expr.Expression, typeof(NameExpression));
+            Assert.IsNotNull(expr.Arguments);
+            Assert.AreEqual(1, expr.Arguments.Count());
+            Assert.IsInstanceOfType(expr.Arguments.First(), typeof(ConstantExpression));
             Assert.AreEqual("help", ((NameExpression)expr.Expression).Name);
 
             Assert.IsNull(parser.ParseExpression());
@@ -286,7 +308,7 @@
             Assert.IsNotNull(expr.Expression);
             Assert.IsInstanceOfType(expr.Expression, typeof(DotExpression));
             Assert.IsNotNull(expr.Arguments);
-            Assert.AreEqual(0, expr.Arguments.Count);
+            Assert.AreEqual(0, expr.Arguments.Count());
 
             Assert.IsNull(parser.ParseExpression());
         }
@@ -306,9 +328,75 @@
             Assert.IsNotNull(expr.Expression);
             Assert.IsInstanceOfType(expr.Expression, typeof(DotExpression));
             Assert.IsNotNull(expr.Arguments);
-            Assert.AreEqual(0, expr.Arguments.Count);
+            Assert.AreEqual(0, expr.Arguments.Count());
 
             Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseSimpleObject()
+        {
+            Parser parser = new Parser("{ Name: 'Adam', Age: 800 }");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ObjectExpression));
+
+            var expr = (ObjectExpression)result;
+
+            Assert.IsNotNull(expr.Names);
+            Assert.AreEqual(2, expr.Names.Count());
+            Assert.AreEqual("Name", expr.Names.First());
+            Assert.AreEqual("Age", expr.Names.Skip(1).First());
+            Assert.AreEqual(2, expr.Expressions.Count());
+            foreach (var argexpr in expr.Expressions)
+                Assert.IsInstanceOfType(argexpr, typeof(ConstantExpression));
+        }
+
+        [TestMethod]
+        public void ParseSimpleObjectWithStringNames()
+        {
+            Parser parser = new Parser("{ 'Name': 'Adam', 'Age': 800 }");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ObjectExpression));
+
+            var expr = (ObjectExpression)result;
+
+            Assert.IsNotNull(expr.Names);
+            Assert.AreEqual(2, expr.Names.Count());
+            Assert.AreEqual("Name", expr.Names.First());
+            Assert.AreEqual("Age", expr.Names.Skip(1).First());
+            Assert.AreEqual(2, expr.Expressions.Count());
+
+            foreach (var argexpr in expr.Expressions)
+                Assert.IsInstanceOfType(argexpr, typeof(ConstantExpression));
+        }
+
+        [TestMethod]
+        public void ParseBadObject()
+        {
+            ParseExpressionWithException("{ 123: 123 }", "Name expected");
+            ParseExpressionWithException("{ Name 123 }", "Expected ':'");
+        }
+
+        private void ParseExpressionWithException(string text, string message)
+        {
+            Parser parser = new Parser(text);
+
+            try
+            {
+                parser.ParseExpression();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual(message, ex.Message);
+            }
         }
     }
 }

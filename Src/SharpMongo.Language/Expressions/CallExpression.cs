@@ -18,6 +18,6 @@
 
         public IExpression Expression { get { return this.expression; } }
 
-        public IList<IExpression> Arguments { get { return this.arguments; } }
+        public IEnumerable<IExpression> Arguments { get { return this.arguments; } }
     }
 }

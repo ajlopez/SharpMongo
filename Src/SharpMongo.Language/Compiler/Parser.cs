@@ -98,6 +98,34 @@
             if (token.Type == TokenType.Real)
                 return new ConstantExpression(double.Parse(token.Value, System.Globalization.CultureInfo.InvariantCulture));
 
+            if (token.Type == TokenType.Punctuation && token.Value == "{")
+            {
+                IList<string> names = new List<string>();
+                IList<IExpression> expressions = new List<IExpression>();
+
+                while (!TryParseToken("}", TokenType.Punctuation))
+                {
+                    if (names.Count > 0)
+                        this.ParseToken(",", TokenType.Punctuation);
+
+                    string name;
+                    
+                    Token tokname = this.NextToken();
+
+                    if (tokname == null || (tokname.Type != TokenType.String && tokname.Type != TokenType.Name))
+                        throw new ParserException("Name expected");
+
+                    name = tokname.Value;
+
+                    this.ParseToken(":", TokenType.Punctuation);
+                    IExpression expression = this.ParseExpression();
+                    names.Add(name);
+                    expressions.Add(expression);
+                }
+
+                return new ObjectExpression(names, expressions);
+            }
+
             throw new ParserException("Syntax error");
         }
 
