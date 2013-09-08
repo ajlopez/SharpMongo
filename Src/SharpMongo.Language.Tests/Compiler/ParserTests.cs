@@ -178,5 +178,56 @@
                 Assert.AreEqual("Syntax error", ex.Message);
             }
         }
+
+        [TestMethod]
+        public void ParseStringExpression()
+        {
+            Parser parser = new Parser("'foo'");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
+
+            var expr = (ConstantExpression)result;
+
+            Assert.AreEqual("foo", expr.Value);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseIntegerExpression()
+        {
+            Parser parser = new Parser("123");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
+
+            var expr = (ConstantExpression)result;
+
+            Assert.AreEqual(123, expr.Value);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseRealExpression()
+        {
+            Parser parser = new Parser("123.456");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
+
+            var expr = (ConstantExpression)result;
+
+            Assert.AreEqual(123.456, expr.Value);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }
