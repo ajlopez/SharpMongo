@@ -7,7 +7,7 @@
 
     public class Lexer
     {
-        private static string punctuations = "();{}:,.";
+        private static string punctuations = "();{}[]:,.";
 
         private string text;
         private int length;

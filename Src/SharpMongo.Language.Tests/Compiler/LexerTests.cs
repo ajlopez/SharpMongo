@@ -61,7 +61,7 @@
         [TestMethod]
         public void GetPunctuations()
         {
-            string punctuations = "();{}:,.";
+            string punctuations = "();{}:,.[]";
             Lexer lexer = new Lexer(punctuations);
 
             for (var k = 0; k < punctuations.Length; k++)

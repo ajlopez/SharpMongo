@@ -126,6 +126,23 @@
                 return new ObjectExpression(names, expressions);
             }
 
+            if (token.Type == TokenType.Punctuation && token.Value == "[")
+            {
+                IList<IExpression> expressions = new List<IExpression>();
+
+                while (!TryParseToken("]", TokenType.Punctuation))
+                {
+                    if (expressions.Count > 0)
+                        this.ParseToken(",", TokenType.Punctuation);
+
+                    IExpression expression = this.ParseExpression();
+
+                    expressions.Add(expression);
+                }
+
+                return new ArrayExpression(expressions);
+            }
+
             throw new ParserException("Syntax error");
         }
 

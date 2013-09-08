@@ -350,8 +350,11 @@
             Assert.AreEqual("Name", expr.Names.First());
             Assert.AreEqual("Age", expr.Names.Skip(1).First());
             Assert.AreEqual(2, expr.Expressions.Count());
+
             foreach (var argexpr in expr.Expressions)
                 Assert.IsInstanceOfType(argexpr, typeof(ConstantExpression));
+
+            Assert.IsNull(parser.ParseExpression());
         }
 
         [TestMethod]
@@ -374,6 +377,8 @@
 
             foreach (var argexpr in expr.Expressions)
                 Assert.IsInstanceOfType(argexpr, typeof(ConstantExpression));
+
+            Assert.IsNull(parser.ParseExpression());
         }
 
         [TestMethod]
@@ -381,6 +386,26 @@
         {
             ParseExpressionWithException("{ 123: 123 }", "Name expected");
             ParseExpressionWithException("{ Name 123 }", "Expected ':'");
+        }
+
+        [TestMethod]
+        public void ParseSimpleArray()
+        {
+            Parser parser = new Parser("[1,2,3]");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ArrayExpression));
+
+            var expr = (ArrayExpression)result;
+
+            Assert.AreEqual(3, expr.Expressions.Count());
+
+            foreach (var argexpr in expr.Expressions)
+                Assert.IsInstanceOfType(argexpr, typeof(ConstantExpression));
+
+            Assert.IsNull(parser.ParseExpression());
         }
 
         private void ParseExpressionWithException(string text, string message)

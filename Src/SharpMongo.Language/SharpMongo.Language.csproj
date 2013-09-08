@@ -52,6 +52,7 @@
     <Compile Include="Compiler\TokenType.cs" />
     <Compile Include="Expressions\CallExpression.cs" />
     <Compile Include="Expressions\ConstantExpression.cs" />
+    <Compile Include="Expressions\ArrayExpression.cs" />
     <Compile Include="Expressions\DotExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
