@@ -7,5 +7,9 @@
 
     public class ExitCommand : ICommand
     {
+        public object Execute(Context context)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

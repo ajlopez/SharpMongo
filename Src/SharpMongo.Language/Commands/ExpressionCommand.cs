@@ -16,5 +16,10 @@
         }
 
         public IExpression Expression { get { return this.expression; } }
+
+        public object Execute(Context context)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
