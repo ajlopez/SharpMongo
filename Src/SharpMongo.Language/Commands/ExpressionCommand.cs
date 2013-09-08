@@ -19,7 +19,7 @@
 
         public object Execute(Context context)
         {
-            throw new NotImplementedException();
+            return this.expression.Evaluate(context);
         }
     }
 }
