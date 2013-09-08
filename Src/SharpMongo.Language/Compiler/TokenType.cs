@@ -9,6 +9,8 @@
     {
         Name = 1,
         String = 2,
-        Punctuation = 3
+        Integer = 3,
+        Real = 4,
+        Punctuation = 5
     }
 }

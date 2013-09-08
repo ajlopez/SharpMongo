@@ -120,5 +120,65 @@
                 Assert.AreEqual("Unclosed string", ex.Message);
             }
         }
+
+        [TestMethod]
+        public void GetInteger()
+        {
+            Lexer lexer = new Lexer("123");
+
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("123", result.Value);
+            Assert.AreEqual(TokenType.Integer, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetIntegerWithSyntaxError()
+        {
+            Lexer lexer = new Lexer("123m");
+
+            try
+            {
+                lexer.NextToken();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Syntax error", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void GetReal()
+        {
+            Lexer lexer = new Lexer("123.456");
+
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("123.456", result.Value);
+            Assert.AreEqual(TokenType.Real, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetRealWithSyntaxError()
+        {
+            Lexer lexer = new Lexer("123.456m");
+
+            try
+            {
+                lexer.NextToken();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("Syntax error", ex.Message);
+            }
+        }
     }
 }

@@ -31,7 +31,10 @@
             char ch = this.text[this.position++];
 
             if (ch == '"' || ch == '\'')
-                return NextString(ch);
+                return this.NextString(ch);
+
+            if (char.IsDigit(ch))
+                return this.NextInteger(ch);
 
             string result = ch.ToString();
 
@@ -44,6 +47,46 @@
             var token = new Token(result, TokenType.Name);
 
             return token;
+        }
+
+        private Token NextInteger(char digit)
+        {
+            string result = digit.ToString();
+
+            while (this.position < this.length && char.IsDigit(this.text[this.position]))
+                result += this.text[this.position++];
+
+            if (this.position < this.length)
+            {
+                char next = this.text[this.position];
+
+                if (next == '.')
+                    return this.NextReal(result);
+
+                if (!punctuations.Contains(next) && !char.IsWhiteSpace(next))
+                    throw new ParserException("Syntax error");
+            }
+
+            return new Token(result, TokenType.Integer);
+        }
+
+        private Token NextReal(string integer)
+        {
+            string result = integer + ".";
+            this.position++;
+
+            while (this.position < this.length && char.IsDigit(this.text[this.position]))
+                result += this.text[this.position++];
+
+            if (this.position < this.length)
+            {
+                char next = this.text[this.position];
+
+                if (!punctuations.Contains(next) && !char.IsWhiteSpace(next))
+                    throw new ParserException("Syntax error");
+            }
+
+            return new Token(result, TokenType.Real);
         }
 
         private Token NextString(char delimiter)
