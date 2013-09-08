@@ -27,5 +27,12 @@
 
             return dbase;
         }
+
+        public IEnumerable<string> GetDocumentBaseNames()
+        {
+            string[] names = this.dbases.Keys.ToArray();
+            Array.Sort(names);
+            return names;
+        }
     }
 }

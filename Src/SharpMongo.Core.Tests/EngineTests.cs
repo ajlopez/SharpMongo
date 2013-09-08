@@ -60,5 +60,21 @@
             Assert.AreEqual("Genesis", result.Name);
             Assert.AreSame(dbase, result);
         }
+
+        [TestMethod]
+        public void GetDocumentBaseNames()
+        {
+            Engine engine = new Engine();
+
+            engine.CreateDocumentBase("Genesis");
+            engine.CreateDocumentBase("Deuteronomius");
+
+            var result = engine.GetDocumentBaseNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual("Deuteronomius", result.First());
+            Assert.AreEqual("Genesis", result.Skip(1).First());
+        }
     }
 }

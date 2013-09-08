@@ -7,5 +7,9 @@
 
     public class ShowDbsCommand : ICommand
     {
+        public object Execute(Context context)
+        {
+            return context.Engine.GetDocumentBaseNames().ToList();
+        }
     }
 }
