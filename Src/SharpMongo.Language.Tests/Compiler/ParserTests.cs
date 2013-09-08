@@ -249,5 +249,25 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseCallExpression()
+        {
+            Parser parser = new Parser("help()");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CallExpression));
+
+            var expr = (CallExpression)result;
+
+            Assert.IsNotNull(expr.Expression);
+            Assert.IsInstanceOfType(expr.Expression, typeof(NameExpression));
+            Assert.IsNotNull(expr.Arguments);
+            Assert.AreEqual(0, expr.Arguments.Count);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }

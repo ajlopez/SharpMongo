@@ -51,6 +51,21 @@
             while (this.TryParseToken(".", TokenType.Punctuation))
                 expr = new DotExpression(expr, this.ParseName());
 
+            while (this.TryParseToken("(", TokenType.Punctuation))
+            {
+                IList<IExpression> exprs = new List<IExpression>();
+
+                while (!this.TryParseToken(")", TokenType.Punctuation))
+                {
+                    if (exprs.Count > 0)
+                        this.ParseToken(",", TokenType.Punctuation);
+
+                    exprs.Add(this.ParseExpression());
+                }
+
+                return new CallExpression(expr, exprs);
+            }
+
             return expr;
         }
 
@@ -100,6 +115,14 @@
             }
 
             return true;
+        }
+
+        private void ParseToken(string value, TokenType type)
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != type || token.Value != value)
+                throw new ParserException(string.Format("Expected '{0}'", value));
         }
 
         private string ParseName()
