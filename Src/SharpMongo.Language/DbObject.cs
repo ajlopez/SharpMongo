@@ -15,6 +15,8 @@
             this.dbase = dbase;
         }
 
+        public DocumentBase DocumentBase { get { return this.dbase; } }
+
         public override object GetMember(string name)
         {
             return new CollectionObject(this.dbase.GetOrCreateCollection(name));

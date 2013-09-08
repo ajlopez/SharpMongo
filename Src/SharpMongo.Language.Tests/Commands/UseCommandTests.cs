@@ -25,6 +25,12 @@
             Assert.AreEqual("Genesis", context.DocumentBase.Name);
             Assert.IsNotNull(context.Engine.GetDocumentBase("Genesis"));
             Assert.AreSame(context.DocumentBase, context.Engine.GetDocumentBase("Genesis"));
+
+            var result = context.GetMember("db");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DbObject));
+            Assert.AreSame(context.DocumentBase, ((DbObject)result).DocumentBase);
         }
     }
 }

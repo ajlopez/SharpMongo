@@ -19,6 +19,8 @@
         public object Execute(Context context)
         {
             context.DocumentBase = context.Engine.GetOrCreateDocumentBase(this.name);
+            DbObject dobj = new DbObject(context.DocumentBase);
+            context.SetMember("db", dobj);
             return null;
         }
     }
