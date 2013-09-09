@@ -29,10 +29,13 @@
         {
             IList<string> names = new List<string>();
 
-            foreach (var name in projection.GetMemberNames().Where(n => !IsFalse(projection.GetMember(n))))
-                names.Add(name);
+            names.Add("Id");
 
-            if (names.Count == 0)
+            foreach (var name in projection.GetMemberNames().Where(n => !IsFalse(projection.GetMember(n))))
+                if (!names.Contains(name))
+                    names.Add(name);
+
+            if (names.Count == 1)
                 names = this.GetMemberNames().ToList();
 
             foreach (var name in projection.GetMemberNames().Where(n => IsFalse(projection.GetMember(n))))

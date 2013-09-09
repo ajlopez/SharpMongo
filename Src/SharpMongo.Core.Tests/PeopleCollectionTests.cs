@@ -104,6 +104,21 @@
         }
 
         [TestMethod]
+        public void FindAllWithProjectionWithImplicitId()
+        {
+            var result = this.collection.Find(null, new DynamicObject("Name", 1));
+
+            Assert.AreEqual(4, result.Count());
+
+            foreach (var document in result)
+            {
+                Assert.IsNotNull(document.Id);
+                Assert.IsNotNull(document.GetMember("Name"));
+                Assert.IsNull(document.GetMember("Age"));
+            }
+        }
+
+        [TestMethod]
         public void FindAllWithProjectionExcludingAge()
         {
             var result = this.collection.Find(null, new DynamicObject("Age", 0));

@@ -66,6 +66,29 @@
             Assert.AreEqual(800, document.GetMember("Age"));
         }
 
+        [TestMethod]
+        public void CallFindWithProjection()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction findmth = (IFunction)collobj.GetMember("find");
+
+            var result = findmth.Apply(new object[] { null, new DynamicObject("Age", 1) });
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IEnumerable<DynamicDocument>));
+
+            var documents = (IEnumerable<DynamicDocument>)result;
+
+            Assert.AreEqual(4, documents.Count());
+
+            Assert.IsTrue(documents.All(d => d.GetMember("Age") != null));
+            Assert.IsTrue(documents.All(d => d.GetMember("Id") != null));
+            Assert.IsTrue(documents.All(d => d.GetMember("Name") == null));
+            Assert.IsTrue(documents.All(d => d.GetMemberNames().Count() == 2));
+        }
+
         private Collection GetCollection()
         {
             var  collection = new Collection("People");

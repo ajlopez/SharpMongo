@@ -31,11 +31,14 @@
             public object Apply(IList<object> arguments)
             {
                 DynamicObject query = null;
+                DynamicObject projection = null;
 
                 if (arguments != null && arguments.Count > 0)
                     query = (DynamicObject)arguments[0];
+                if (arguments != null && arguments.Count > 1)
+                    projection = (DynamicObject)arguments[1];
 
-                return this.self.Collection.Find(query);
+                return this.self.Collection.Find(query, projection);
             }
         }
 
