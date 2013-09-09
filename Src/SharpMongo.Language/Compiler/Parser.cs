@@ -92,7 +92,15 @@
                 return null;
 
             if (token.Type == TokenType.Name)
+            {
+                if (token.Value == "true")
+                    return new ConstantExpression(true);
+
+                if (token.Value == "false")
+                    return new ConstantExpression(false);
+
                 return new NameExpression(token.Value);
+            }
 
             if (token.Type == TokenType.String)
                 return new ConstantExpression(token.Value);

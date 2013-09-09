@@ -119,6 +119,30 @@
         }
 
         [TestMethod]
+        public void ParseTrue()
+        {
+            Parser parser = new Parser("true");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
+            Assert.AreEqual(true, ((ConstantExpression)result).Value);
+        }
+
+        [TestMethod]
+        public void ParseFalse()
+        {
+            Parser parser = new Parser("false");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
+            Assert.AreEqual(false, ((ConstantExpression)result).Value);
+        }
+
+        [TestMethod]
         public void ParseSimpleExpressionCommand()
         {
             Parser parser = new Parser("123");
