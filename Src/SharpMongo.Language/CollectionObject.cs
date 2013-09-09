@@ -30,7 +30,12 @@
 
             public object Apply(IList<object> arguments)
             {
-                return this.self.Collection.Find();
+                DynamicObject query = null;
+
+                if (arguments != null && arguments.Count > 0)
+                    query = (DynamicObject)arguments[0];
+
+                return this.self.Collection.Find(query);
             }
         }
 
