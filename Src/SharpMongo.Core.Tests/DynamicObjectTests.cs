@@ -95,13 +95,49 @@
         [TestMethod]
         public void UpdateProperties()
         {
-            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800);
             DynamicObject update = new DynamicObject("Height", 180, "Age", 700);
 
-            document.Update(update);
+            obj.Update(update);
 
-            Assert.AreEqual(180, document.GetMember("Height"));
-            Assert.AreEqual(700, document.GetMember("Age"));
+            Assert.AreEqual(180, obj.GetMember("Height"));
+            Assert.AreEqual(700, obj.GetMember("Age"));
+        }
+
+        [TestMethod]
+        public void GetMemberNames()
+        {
+            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800, "Wife", "Eve" );
+
+            var result = obj.GetMemberNames().ToList();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("Name", result[0]);
+            Assert.AreEqual("Age", result[1]);
+            Assert.AreEqual("Wife", result[2]);
+        }
+
+        [TestMethod]
+        public void ToJsonString()
+        {
+            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800, "Wife", "Eve");
+
+            var result = obj.ToJsonString();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("{ \"Name\": \"Adam\", \"Age\": 800, \"Wife\": \"Eve\" }", result);
+        }
+
+        [TestMethod]
+        public void EmptyToJsonString()
+        {
+            DynamicObject obj = new DynamicObject();
+
+            var result = obj.ToJsonString();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("{ }", result);
         }
     }
 }
