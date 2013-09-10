@@ -15,6 +15,7 @@
             this.collection = collection;
             this.SetMember("insert", new InsertMethod(this));
             this.SetMember("find", new FindMethod(this));
+            this.SetMember("update", new UpdateMethod(this));
         }
 
         public Collection Collection { get { return this.collection; } }
@@ -39,6 +40,30 @@
                     projection = (DynamicObject)arguments[1];
 
                 return this.self.Collection.Find(query, projection);
+            }
+        }
+
+        private class UpdateMethod : IFunction
+        {
+            private CollectionObject self;
+
+            public UpdateMethod(CollectionObject self)
+            {
+                this.self = self;
+            }
+
+            public object Apply(IList<object> arguments)
+            {
+                DynamicObject query = (DynamicObject)arguments[0];
+                DynamicObject update = (DynamicObject)arguments[1];
+                bool multi = false;
+
+                if (arguments.Count > 2)
+                    multi = (bool)arguments[2];
+
+                this.self.Collection.Update(query, update, multi);
+
+                return null;
             }
         }
 
