@@ -16,6 +16,7 @@
             this.SetMember("insert", new InsertMethod(this));
             this.SetMember("find", new FindMethod(this));
             this.SetMember("update", new UpdateMethod(this));
+            this.SetMember("remove", new RemoveMethod(this));
         }
 
         public Collection Collection { get { return this.collection; } }
@@ -62,6 +63,31 @@
                     multi = (bool)arguments[2];
 
                 this.self.Collection.Update(query, update, multi);
+
+                return null;
+            }
+        }
+
+        private class RemoveMethod : IFunction
+        {
+            private CollectionObject self;
+
+            public RemoveMethod(CollectionObject self)
+            {
+                this.self = self;
+            }
+
+            public object Apply(IList<object> arguments)
+            {
+                DynamicObject query = null;
+                bool justone = false;
+                
+                if (arguments.Count > 0)
+                    query = (DynamicObject)arguments[0];
+                if (arguments.Count > 1)
+                    justone = (bool)arguments[1];
+
+                this.self.Collection.Remove(query, justone);
 
                 return null;
             }

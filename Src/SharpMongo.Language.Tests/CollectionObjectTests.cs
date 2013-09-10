@@ -142,6 +142,56 @@
             Assert.IsTrue(result.All(d => d.GetMember("Kind").Equals("Human")));
         }
 
+        [TestMethod]
+        public void CallRemoveOne()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction removemth = (IFunction)collobj.GetMember("remove");
+
+            removemth.Apply(new object[] { new DynamicObject( "Age", 700 ) });
+
+            var result = collection.Find();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count());
+
+            Assert.IsTrue(result.All(d => !d.GetMember("Age").Equals(700)));
+        }
+
+        [TestMethod]
+        public void CallRemoveAll()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction removemth = (IFunction)collobj.GetMember("remove");
+
+            removemth.Apply(new object[] { });
+
+            var result = collection.Find();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count());
+        }
+
+        [TestMethod]
+        public void CallRemoveFirst()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction removemth = (IFunction)collobj.GetMember("remove");
+
+            removemth.Apply(new object[] { null, true });
+
+            var result = collection.Find();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count());
+        }
+
         private Collection GetCollection()
         {
             var  collection = new Collection("People");
