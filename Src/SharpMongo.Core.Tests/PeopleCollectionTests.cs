@@ -76,6 +76,19 @@
         }
 
         [TestMethod]
+        public void UpdateKindInAllDocuments()
+        {
+            this.collection.Update(null, new DynamicDocument("Kind", "human"), true);
+
+            var result = this.collection.Find();
+
+            Assert.AreEqual(4, result.Count());
+
+            Assert.IsTrue(result.All(d => d.GetMemberNames().Contains("Kind")));
+            Assert.IsTrue(result.All(d => d.GetMember("Kind").Equals("human")));
+        }
+
+        [TestMethod]
         public void UpdateAgeInAllDocumentsUsingNullQuery()
         {
             this.collection.Update(null, new DynamicDocument("Age", 600), true);

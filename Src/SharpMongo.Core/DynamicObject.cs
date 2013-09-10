@@ -52,7 +52,12 @@
         public void Update(DynamicObject document)
         {
             foreach (var key in document.values.Keys)
+            {
+                if (!this.names.Contains(key))
+                    this.names.Add(key);
+
                 this.values[key] = document.values[key];
+            }
         }
 
         public void Seal()

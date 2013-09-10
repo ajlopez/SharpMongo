@@ -138,6 +138,7 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(4, result.Count());
 
+            Assert.IsTrue(result.All(d => d.GetMemberNames().Contains("Kind")));
             Assert.IsTrue(result.All(d => d.GetMember("Kind").Equals("Human")));
         }
 
