@@ -123,6 +123,24 @@
             Assert.AreEqual("New Eve", result.GetMember("Name"));
         }
 
+        [TestMethod]
+        public void CallUpdateAllWithMulti()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction updatemth = (IFunction)collobj.GetMember("update");
+
+            updatemth.Apply(new object[] { null, new DynamicObject("Kind", "Human"), true });
+
+            var result = collection.Find();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(4, result.Count());
+
+            Assert.IsTrue(result.All(d => d.GetMember("Kind").Equals("Human")));
+        }
+
         private Collection GetCollection()
         {
             var  collection = new Collection("People");
