@@ -89,6 +89,59 @@
             Assert.IsTrue(documents.All(d => d.GetMemberNames().Count() == 2));
         }
 
+        [TestMethod]
+        public void CallUpdate()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction updatemth = (IFunction)collobj.GetMember("update");
+
+            updatemth.Apply(new object[] { new DynamicObject("Age", 700), new DynamicObject("Name", "New Eve") });
+
+            var result = collection.Find(new DynamicObject("Age", 700)).FirstOrDefault();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(700, result.GetMember("Age"));
+            Assert.AreEqual("New Eve", result.GetMember("Name"));
+        }
+
+        [TestMethod]
+        public void CallUpdateWithMulti()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction updatemth = (IFunction)collobj.GetMember("update");
+
+            updatemth.Apply(new object[] { new DynamicObject("Age", 700), new DynamicObject("Name", "New Eve"), true });
+
+            var result = collection.Find(new DynamicObject("Age", 700)).FirstOrDefault();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(700, result.GetMember("Age"));
+            Assert.AreEqual("New Eve", result.GetMember("Name"));
+        }
+
+        [TestMethod]
+        public void CallUpdateAllWithMulti()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction updatemth = (IFunction)collobj.GetMember("update");
+
+            updatemth.Apply(new object[] { null, new DynamicObject("Kind", "Human"), true });
+
+            var result = collection.Find();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(4, result.Count());
+
+            Assert.IsTrue(result.All(d => d.GetMemberNames().Contains("Kind")));
+            Assert.IsTrue(result.All(d => d.GetMember("Kind").Equals("Human")));
+        }
+
         private Collection GetCollection()
         {
             var  collection = new Collection("People");

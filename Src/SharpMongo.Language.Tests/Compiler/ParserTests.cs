@@ -131,6 +131,18 @@
         }
 
         [TestMethod]
+        public void ParseNull()
+        {
+            Parser parser = new Parser("null");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
+            Assert.IsNull(((ConstantExpression)result).Value);
+        }
+
+        [TestMethod]
         public void ParseFalse()
         {
             Parser parser = new Parser("false");

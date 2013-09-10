@@ -99,6 +99,9 @@
                 if (token.Value == "false")
                     return new ConstantExpression(false);
 
+                if (token.Value == "null")
+                    return new ConstantExpression(null);
+
                 return new NameExpression(token.Value);
             }
 
