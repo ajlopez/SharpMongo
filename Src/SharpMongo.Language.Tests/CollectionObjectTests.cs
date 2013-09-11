@@ -11,6 +11,8 @@
     [TestClass]
     public class CollectionObjectTests
     {
+        private DynamicDocument adam;
+
         [TestMethod]
         public void CallInsertObject()
         {
@@ -192,11 +194,47 @@
             Assert.AreEqual(3, result.Count());
         }
 
+        [TestMethod]
+        public void CallSaveNewDocument()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction savemth = (IFunction)collobj.GetMember("save");
+
+            savemth.Apply(new object[] { new DynamicObject("Name", "Set", "Age", 300) });
+
+            var result = collection.Find(new DynamicObject("Name", "Set")).FirstOrDefault();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Set", result.GetMember("Name"));
+            Assert.AreEqual(300, result.GetMember("Age"));
+            Assert.IsNotNull(result.Id);
+        }
+
+        [TestMethod]
+        public void CallSaveExistingDocument()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction savemth = (IFunction)collobj.GetMember("save");
+
+            savemth.Apply(new object[] { new DynamicObject("Id", adam.Id, "Name", "Adam", "Age", 300) });
+
+            var result = collection.Find(new DynamicObject("Name", "Adam")).FirstOrDefault();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.AreEqual(300, result.GetMember("Age"));
+            Assert.AreEqual(adam.Id, result.Id);
+        }
+
         private Collection GetCollection()
         {
             var  collection = new Collection("People");
 
-            var adam = new DynamicDocument("Name", "Adam", "Age", 800);
+            this.adam = new DynamicDocument("Name", "Adam", "Age", 800);
             var eve = new DynamicDocument("Name", "Eve", "Age", 700);
             var cain = new DynamicDocument("Name", "Cain", "Age", 600);
             var abel = new DynamicDocument("Name", "Abel", "Age", 500);
