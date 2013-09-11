@@ -16,6 +16,8 @@
             this.SetMember("insert", new InsertMethod(this));
             this.SetMember("find", new FindMethod(this));
             this.SetMember("update", new UpdateMethod(this));
+            this.SetMember("remove", new RemoveMethod(this));
+            this.SetMember("save", new SaveMethod(this));
         }
 
         public Collection Collection { get { return this.collection; } }
@@ -67,6 +69,31 @@
             }
         }
 
+        private class RemoveMethod : IFunction
+        {
+            private CollectionObject self;
+
+            public RemoveMethod(CollectionObject self)
+            {
+                this.self = self;
+            }
+
+            public object Apply(IList<object> arguments)
+            {
+                DynamicObject query = null;
+                bool justone = false;
+                
+                if (arguments.Count > 0)
+                    query = (DynamicObject)arguments[0];
+                if (arguments.Count > 1)
+                    justone = (bool)arguments[1];
+
+                this.self.Collection.Remove(query, justone);
+
+                return null;
+            }
+        }
+
         private class InsertMethod : IFunction
         {
             private CollectionObject self;
@@ -89,6 +116,33 @@
                     doc.Id = Guid.NewGuid();
 
                 this.self.Collection.Insert(doc);
+
+                return null;
+            }
+        }
+
+        private class SaveMethod : IFunction
+        {
+            private CollectionObject self;
+
+            public SaveMethod(CollectionObject self)
+            {
+                this.self = self;
+            }
+
+            public object Apply(IList<object> arguments)
+            {
+                IObject dobj = (IObject)arguments[0];
+
+                DynamicDocument doc = new DynamicDocument();
+
+                foreach (var name in dobj.GetMemberNames())
+                    doc.SetMember(name, dobj.GetMember(name));
+
+                if (doc.Id == null)
+                    doc.Id = Guid.NewGuid();
+
+                this.self.Collection.Save(doc);
 
                 return null;
             }
