@@ -443,6 +443,30 @@
         }
 
         [TestMethod]
+        public void ParseSimpleObjectWithArray()
+        {
+            Parser parser = new Parser("{ Name: 'Adam', Age: 800, Tags: [ 'male', 'beer' ] }");
+            
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ObjectExpression));
+
+            var expr = (ObjectExpression)result;
+
+            Assert.IsNotNull(expr.Names);
+            Assert.AreEqual(3, expr.Names.Count());
+            Assert.AreEqual("Name", expr.Names.First());
+            Assert.AreEqual("Age", expr.Names.Skip(1).First());
+            Assert.AreEqual("Tags", expr.Names.Skip(2).First());
+            Assert.AreEqual(3, expr.Expressions.Count());
+
+            Assert.IsInstanceOfType(expr.Expressions.Skip(2).First(), typeof(ArrayExpression));
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseBadObject()
         {
             this.ParseExpressionWithException("{ 123: 123 }", "Name expected");
