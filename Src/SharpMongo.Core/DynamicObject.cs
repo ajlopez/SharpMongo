@@ -49,8 +49,21 @@
             return true;
         }
 
-        public void Update(DynamicObject document)
+        public void Update(DynamicObject document, bool reset = false)
         {
+            if (reset)
+            {
+                object id = this.GetMember("Id");
+                this.names = new List<string>();
+                this.values = new Dictionary<string, object>();
+
+                if (id != null)
+                {
+                    this.names.Add("Id");
+                    this.values["Id"] = id;
+                }
+            }
+
             foreach (var key in document.values.Keys)
             {
                 if (!this.names.Contains(key))

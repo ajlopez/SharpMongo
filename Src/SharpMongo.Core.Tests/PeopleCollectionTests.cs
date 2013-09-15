@@ -43,15 +43,16 @@
         [TestMethod]
         public void UpdateAgeInOneDocument()
         {
-            this.collection.Update(new DynamicDocument("Id", this.eve.Id), new DynamicDocument("Age", 600));
+            this.collection.Update(new DynamicObject("Id", this.eve.Id), new DynamicObject("Age", 600));
 
-            var result = this.collection.Find(new DynamicDocument("Id", this.eve.Id));
+            var result = this.collection.Find(new DynamicObject("Id", this.eve.Id));
 
             Assert.AreEqual(1, result.Count());
 
             Assert.AreEqual(this.eve.Id, result.First().GetMember("Id"));
-            Assert.AreEqual("Eve", result.First().GetMember("Name"));
+            Assert.IsNull(result.First().GetMember("Name"));
             Assert.AreEqual(600, result.First().GetMember("Age"));
+            Assert.AreEqual(2, result.First().GetMemberNames().Count());
 
             result = this.collection.Find(new DynamicDocument("Id", this.adam.GetMember("Id")));
 

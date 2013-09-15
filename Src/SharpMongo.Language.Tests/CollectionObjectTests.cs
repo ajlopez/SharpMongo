@@ -99,7 +99,7 @@
             CollectionObject collobj = new CollectionObject(collection);
             IFunction updatemth = (IFunction)collobj.GetMember("update");
 
-            updatemth.Apply(new object[] { new DynamicObject("Age", 700), new DynamicObject("Name", "New Eve") });
+            updatemth.Apply(new object[] { new DynamicObject("Age", 700), new DynamicObject("Name", "New Eve", "Age", 700) });
 
             var result = collection.Find(new DynamicObject("Age", 700)).FirstOrDefault();
 
@@ -116,7 +116,7 @@
             CollectionObject collobj = new CollectionObject(collection);
             IFunction updatemth = (IFunction)collobj.GetMember("update");
 
-            updatemth.Apply(new object[] { new DynamicObject("Age", 700), new DynamicObject("Name", "New Eve"), true });
+            updatemth.Apply(new object[] { new DynamicObject("Age", 700), new DynamicObject("Name", "New Eve", "Age", 700), true });
 
             var result = collection.Find(new DynamicObject("Age", 700)).FirstOrDefault();
 

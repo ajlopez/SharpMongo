@@ -92,7 +92,7 @@
         {
             foreach (var document in this.Find(query))
             {
-                document.Update(update);
+                document.Update(update, true);
 
                 if (!multi)
                     return;
