@@ -220,5 +220,12 @@
 
             Assert.AreEqual(0, result.Count());
         }
+
+        [TestMethod]
+        public void CountOnEmptyCollection()
+        {
+            Collection collection = new Collection("Test");
+            Assert.AreEqual(0, collection.Count());
+        }
     }
 }

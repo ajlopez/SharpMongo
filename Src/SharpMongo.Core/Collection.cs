@@ -118,5 +118,10 @@
                 this.documentsbyid.Remove(id);
             }
         }
+
+        public int Count()
+        {
+            return this.documents.Count;
+        }
     }
 }
