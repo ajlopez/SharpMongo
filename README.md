@@ -16,3 +16,7 @@ Work in Progress
 - [Developing mobile apps with Node.js and MongoDB, Part 1: A team's methods and results](http://www.ibm.com/developerworks/java/library/mo-nodejs-1/index.html)
 - [Developing mobile apps with Node.js and MongoDB, Part 2: Hints and tips](http://www.ibm.com/developerworks/mobile/library/mo-nodejs-2/index.html)
 - [A little about CouchDB (and comparison with MongoDB)](http://petrush.in/blog/2013/a-little-about-cochudb-and-comparison-with-mongodb/show) see MVCC, Map/Reduce, ...
+- [MongoDB 2.6: Our Biggest Release Ever](http://blog.mongodb.org/post/82092813806/mongodb-2-6-our-biggest-release-ever)
+- [Release Notes for MongoDB 2.6](http://docs.mongodb.org/manual/release-notes/2.6/)
+
+
