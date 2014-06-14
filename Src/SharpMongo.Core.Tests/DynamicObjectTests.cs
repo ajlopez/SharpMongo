@@ -107,7 +107,7 @@
         [TestMethod]
         public void GetMemberNames()
         {
-            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800, "Wife", "Eve" );
+            DynamicObject obj = new DynamicObject("Name", "Adam", "Age", 800, "Wife", "Eve");
 
             var result = obj.GetMemberNames().ToList();
 

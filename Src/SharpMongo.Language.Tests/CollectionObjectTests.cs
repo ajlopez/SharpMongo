@@ -1,12 +1,12 @@
 ﻿namespace SharpMongo.Language.Tests
 {
     using System;
-    using System.Text;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SharpMongo.Core;
-    using System.Collections;
 
     [TestClass]
     public class CollectionObjectTests
@@ -37,7 +37,7 @@
         [TestMethod]
         public void CallFind()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction findmth = (IFunction)collobj.GetMember("find");
@@ -52,7 +52,7 @@
         [TestMethod]
         public void CallFindWithQuery()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction findmth = (IFunction)collobj.GetMember("find");
@@ -71,7 +71,7 @@
         [TestMethod]
         public void CallFindWithProjection()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction findmth = (IFunction)collobj.GetMember("find");
@@ -94,7 +94,7 @@
         [TestMethod]
         public void CallUpdate()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction updatemth = (IFunction)collobj.GetMember("update");
@@ -111,7 +111,7 @@
         [TestMethod]
         public void CallUpdateWithMulti()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction updatemth = (IFunction)collobj.GetMember("update");
@@ -128,7 +128,7 @@
         [TestMethod]
         public void CallUpdateAllWithMulti()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction updatemth = (IFunction)collobj.GetMember("update");
@@ -147,7 +147,7 @@
         [TestMethod]
         public void CallCount()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction countmth = (IFunction)collobj.GetMember("count");
@@ -161,7 +161,7 @@
         [TestMethod]
         public void CallCountWithQueryCriteria()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction countmth = (IFunction)collobj.GetMember("count");
@@ -175,12 +175,12 @@
         [TestMethod]
         public void CallRemoveOne()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction removemth = (IFunction)collobj.GetMember("remove");
 
-            removemth.Apply(new object[] { new DynamicObject( "Age", 700 ) });
+            removemth.Apply(new object[] { new DynamicObject("Age", 700) });
 
             var result = collection.Find();
 
@@ -193,7 +193,7 @@
         [TestMethod]
         public void CallRemoveAll()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction removemth = (IFunction)collobj.GetMember("remove");
@@ -209,7 +209,7 @@
         [TestMethod]
         public void CallRemoveFirst()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction removemth = (IFunction)collobj.GetMember("remove");
@@ -225,7 +225,7 @@
         [TestMethod]
         public void CallSaveNewDocument()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction savemth = (IFunction)collobj.GetMember("save");
@@ -243,31 +243,31 @@
         [TestMethod]
         public void CallSaveExistingDocument()
         {
-            Collection collection = GetCollection();
+            Collection collection = this.GetCollection();
 
             CollectionObject collobj = new CollectionObject(collection);
             IFunction savemth = (IFunction)collobj.GetMember("save");
 
-            savemth.Apply(new object[] { new DynamicObject("Id", adam.Id, "Name", "Adam", "Age", 300) });
+            savemth.Apply(new object[] { new DynamicObject("Id", this.adam.Id, "Name", "Adam", "Age", 300) });
 
             var result = collection.Find(new DynamicObject("Name", "Adam")).FirstOrDefault();
 
             Assert.IsNotNull(result);
             Assert.AreEqual("Adam", result.GetMember("Name"));
             Assert.AreEqual(300, result.GetMember("Age"));
-            Assert.AreEqual(adam.Id, result.Id);
+            Assert.AreEqual(this.adam.Id, result.Id);
         }
 
         private Collection GetCollection()
         {
-            var  collection = new Collection("People");
+            var collection = new Collection("People");
 
             this.adam = new DynamicDocument("Name", "Adam", "Age", 800);
             var eve = new DynamicDocument("Name", "Eve", "Age", 700);
             var cain = new DynamicDocument("Name", "Cain", "Age", 600);
             var abel = new DynamicDocument("Name", "Abel", "Age", 500);
 
-            collection.Insert(adam);
+            collection.Insert(this.adam);
             collection.Insert(eve);
             collection.Insert(cain);
             collection.Insert(abel);

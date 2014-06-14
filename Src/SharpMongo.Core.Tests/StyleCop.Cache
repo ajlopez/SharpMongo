@@ -1,23 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <sourcecode name="CollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:32:22</timestamp>
-      <milliseconds>879</milliseconds>
-    </settings>
-    <timestamp>09/06/2013 19:28:54</timestamp>
-    <milliseconds>604</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="DynamicObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:32:22</timestamp>
-      <milliseconds>879</milliseconds>
-    </settings>
-    <timestamp>08/25/2013 15:21:58</timestamp>
-    <milliseconds>134</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:32:22</timestamp>
@@ -27,27 +9,6 @@
     <milliseconds>164</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="PeopleCollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:32:22</timestamp>
-      <milliseconds>879</milliseconds>
-    </settings>
-    <timestamp>09/06/2013 19:29:04</timestamp>
-    <milliseconds>88</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="DynamicDocumentTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:32:22</timestamp>
-      <milliseconds>879</milliseconds>
-    </settings>
-    <timestamp>09/07/2013 19:22:13</timestamp>
-    <milliseconds>895</milliseconds>
-    <violations />
-  </sourcecode>
-  <project key="1875141538">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="DocumentBaseTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:32:22</timestamp>
@@ -66,4 +27,43 @@
     <milliseconds>686</milliseconds>
     <violations />
   </sourcecode>
+  <sourcecode name="CollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:32:22</timestamp>
+      <milliseconds>879</milliseconds>
+    </settings>
+    <timestamp>06/14/2014 14:45:11</timestamp>
+    <milliseconds>717</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DynamicDocumentTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:32:22</timestamp>
+      <milliseconds>879</milliseconds>
+    </settings>
+    <timestamp>09/09/2013 21:12:01</timestamp>
+    <milliseconds>719</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="PeopleCollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:32:22</timestamp>
+      <milliseconds>879</milliseconds>
+    </settings>
+    <timestamp>06/14/2014 14:56:28</timestamp>
+    <milliseconds>78</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DynamicObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:32:22</timestamp>
+      <milliseconds>879</milliseconds>
+    </settings>
+    <timestamp>06/14/2014 15:04:57</timestamp>
+    <milliseconds>658</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="1875141538">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>
