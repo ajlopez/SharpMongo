@@ -18,6 +18,7 @@
             this.SetMember("update", new UpdateMethod(this));
             this.SetMember("remove", new RemoveMethod(this));
             this.SetMember("save", new SaveMethod(this));
+            this.SetMember("count", new CountMethod(this));
         }
 
         public Collection Collection { get { return this.collection; } }
@@ -42,6 +43,26 @@
                     projection = (DynamicObject)arguments[1];
 
                 return this.self.Collection.Find(query, projection);
+            }
+        }
+
+        private class CountMethod : IFunction
+        {
+            private CollectionObject self;
+
+            public CountMethod(CollectionObject self)
+            {
+                this.self = self;
+            }
+
+            public object Apply(IList<object> arguments)
+            {
+                DynamicObject query = null;
+
+                if (arguments != null && arguments.Count > 0)
+                    query = (DynamicObject)arguments[0];
+
+                return this.self.Collection.Count(query);
             }
         }
 

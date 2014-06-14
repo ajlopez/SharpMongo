@@ -145,6 +145,34 @@
         }
 
         [TestMethod]
+        public void CallCount()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction countmth = (IFunction)collobj.GetMember("count");
+
+            var result = countmth.Apply(new object[] { });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(4, result);
+        }
+
+        [TestMethod]
+        public void CallCountWithQueryCriteria()
+        {
+            Collection collection = GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction countmth = (IFunction)collobj.GetMember("count");
+
+            var result = countmth.Apply(new object[] { new DynamicObject("Age", 700) });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
         public void CallRemoveOne()
         {
             Collection collection = GetCollection();
