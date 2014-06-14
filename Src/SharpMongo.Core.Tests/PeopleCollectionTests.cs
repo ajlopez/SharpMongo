@@ -47,6 +47,12 @@
         }
 
         [TestMethod]
+        public void CountWithQueryCriteria()
+        {
+            Assert.AreEqual(1, this.collection.Count(new DynamicObject("Id", this.eve.Id)));
+        }
+
+        [TestMethod]
         public void UpdateAgeInOneDocument()
         {
             this.collection.Update(new DynamicObject("Id", this.eve.Id), new DynamicObject("Age", 600));

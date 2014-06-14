@@ -119,8 +119,11 @@
             }
         }
 
-        public int Count()
+        public int Count(DynamicObject query = null)
         {
+            if (query != null)
+                return this.Find(query).Count();
+
             return this.documents.Count;
         }
     }
