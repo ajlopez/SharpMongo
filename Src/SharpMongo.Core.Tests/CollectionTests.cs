@@ -178,7 +178,7 @@
         }
 
         [TestMethod]
-        public void FindOneDocumentUsingQueryWithId()
+        public void FindADocumentUsingQueryWithId()
         {
             Collection collection = new Collection("Test");
             DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
@@ -194,6 +194,40 @@
             Assert.AreEqual(document2.GetMember("Id"), result.First().GetMember("Id"));
             Assert.AreEqual("Eve", result.First().GetMember("Name"));
             Assert.AreEqual(700, result.First().GetMember("Age"));
+        }
+
+        [TestMethod]
+        public void FindOneDocumentUsingQueryWithId()
+        {
+            Collection collection = new Collection("Test");
+            DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
+
+            collection.Insert(document1);
+            collection.Insert(document2);
+
+            var result = collection.FindOne(new DynamicDocument("Id", document2.GetMember("Id"), "Age", 700));
+
+            Assert.IsNotNull(result);
+
+            Assert.AreEqual(document2.GetMember("Id"), result.GetMember("Id"));
+            Assert.AreEqual("Eve", result.GetMember("Name"));
+            Assert.AreEqual(700, result.GetMember("Age"));
+        }
+
+        [TestMethod]
+        public void FindOneUnknownDocument()
+        {
+            Collection collection = new Collection("Test");
+            DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
+
+            collection.Insert(document1);
+            collection.Insert(document2);
+
+            var result = collection.FindOne(new DynamicDocument("Age", 600));
+
+            Assert.IsNull(result);
         }
 
         [TestMethod]

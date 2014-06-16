@@ -62,6 +62,11 @@
             return this.documentsbyid[id];
         }
 
+        public DynamicDocument FindOne(DynamicObject query = null, DynamicObject projection = null)
+        {
+            return this.Find(query, projection).FirstOrDefault();
+        }
+
         public IEnumerable<DynamicDocument> Find(DynamicObject query = null, DynamicObject projection = null)
         {
             if (projection != null)
