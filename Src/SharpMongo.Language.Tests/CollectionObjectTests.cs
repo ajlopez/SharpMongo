@@ -92,6 +92,45 @@
         }
 
         [TestMethod]
+        public void CallFindOneWithQuery()
+        {
+            Collection collection = this.GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction findonemth = (IFunction)collobj.GetMember("findOne");
+
+            var result = findonemth.Apply(new object[] { new DynamicObject("Age", 800) });
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicDocument));
+
+            var document = (DynamicDocument)result;
+
+            Assert.AreEqual(800, document.GetMember("Age"));
+        }
+
+        [TestMethod]
+        public void CallFindOneWithProjection()
+        {
+            Collection collection = this.GetCollection();
+
+            CollectionObject collobj = new CollectionObject(collection);
+            IFunction findonemth = (IFunction)collobj.GetMember("findOne");
+
+            var result = findonemth.Apply(new object[] { null, new DynamicObject("Age", 1) });
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicDocument));
+
+            var document = (DynamicDocument)result;
+
+            Assert.IsNotNull(document.GetMember("Age"));
+            Assert.IsNotNull(document.GetMember("Id"));
+            Assert.IsNull(document.GetMember("Name"));
+            Assert.AreEqual(2, document.GetMemberNames().Count());
+        }
+
+        [TestMethod]
         public void CallUpdate()
         {
             Collection collection = this.GetCollection();

@@ -15,6 +15,7 @@
             this.collection = collection;
             this.SetMember("insert", new InsertMethod(this));
             this.SetMember("find", new FindMethod(this));
+            this.SetMember("findOne", new FindOneMethod(this));
             this.SetMember("update", new UpdateMethod(this));
             this.SetMember("remove", new RemoveMethod(this));
             this.SetMember("save", new SaveMethod(this));
@@ -43,6 +44,29 @@
                     projection = (DynamicObject)arguments[1];
 
                 return this.self.Collection.Find(query, projection);
+            }
+        }
+
+        private class FindOneMethod : IFunction
+        {
+            private CollectionObject self;
+
+            public FindOneMethod(CollectionObject self)
+            {
+                this.self = self;
+            }
+
+            public object Apply(IList<object> arguments)
+            {
+                DynamicObject query = null;
+                DynamicObject projection = null;
+
+                if (arguments != null && arguments.Count > 0)
+                    query = (DynamicObject)arguments[0];
+                if (arguments != null && arguments.Count > 1)
+                    projection = (DynamicObject)arguments[1];
+
+                return this.self.Collection.FindOne(query, projection);
             }
         }
 
