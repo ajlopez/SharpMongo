@@ -216,6 +216,24 @@
         }
 
         [TestMethod]
+        public void DistinctAge()
+        {
+            Collection collection = new Collection("Test");
+            DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
+
+            collection.Insert(document1);
+            collection.Insert(document2);
+
+            var result = collection.Distinct("Age");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.Contains(800));
+            Assert.IsTrue(result.Contains(700));
+        }
+
+        [TestMethod]
         public void FindOneUnknownDocument()
         {
             Collection collection = new Collection("Test");

@@ -131,5 +131,10 @@
 
             return this.documents.Count;
         }
+
+        public IEnumerable<object> Distinct(string field)
+        {
+            return this.documents.Select(d => d.GetMember(field)).Distinct();
+        }
     }
 }
