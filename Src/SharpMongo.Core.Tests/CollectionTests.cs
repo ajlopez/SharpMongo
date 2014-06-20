@@ -221,9 +221,13 @@
             Collection collection = new Collection("Test");
             DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
             DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
+            DynamicDocument document3 = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument document4 = new DynamicDocument("Name", "Eve", "Age", 700);
 
             collection.Insert(document1);
             collection.Insert(document2);
+            collection.Insert(document3);
+            collection.Insert(document4);
 
             var result = collection.Distinct("Age");
 
@@ -231,6 +235,28 @@
             Assert.AreEqual(2, result.Count());
             Assert.IsTrue(result.Contains(800));
             Assert.IsTrue(result.Contains(700));
+        }
+
+        [TestMethod]
+        public void DistinctAgeWithFilter()
+        {
+            Collection collection = new Collection("Test");
+            DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
+            DynamicDocument document3 = new DynamicDocument("Name", "Adam", "Age", 801);
+            DynamicDocument document4 = new DynamicDocument("Name", "Eve", "Age", 701);
+
+            collection.Insert(document1);
+            collection.Insert(document2);
+            collection.Insert(document3);
+            collection.Insert(document4);
+
+            var result = collection.Distinct("Age", new DynamicObject("Name", "Adam"));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.Contains(800));
+            Assert.IsTrue(result.Contains(801));
         }
 
         [TestMethod]

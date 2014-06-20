@@ -132,9 +132,9 @@
             return this.documents.Count;
         }
 
-        public IEnumerable<object> Distinct(string field)
+        public IEnumerable<object> Distinct(string field, DynamicObject query = null)
         {
-            return this.documents.Select(d => d.GetMember(field)).Distinct();
+            return this.Find(query).Select(d => d.GetMember(field)).Distinct();
         }
     }
 }
