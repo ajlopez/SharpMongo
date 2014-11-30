@@ -56,14 +56,14 @@
 
                     if (result is IEnumerable<DynamicObject>)
                     {
-                        foreach (var doc in ((IEnumerable<DynamicObject>)result))
+                        foreach (var doc in (IEnumerable<DynamicObject>)result)
                             Console.WriteLine(doc.ToJsonString());
                         continue;
                     }
 
                     if (result is IEnumerable)
                     {
-                        foreach (var value in ((IEnumerable)result))
+                        foreach (var value in (IEnumerable)result)
                             Console.WriteLine(value.ToString());
                         continue;
                     }
@@ -81,6 +81,5 @@
                 }
             }
         }
-
     }
 }

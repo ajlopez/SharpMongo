@@ -171,18 +171,6 @@
     <milliseconds>424</milliseconds>
     <violations />
   </sourcecode>
-  <project key="-691438917">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
-  <sourcecode name="CollectionObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>09/07/2013 19:20:47</timestamp>
-      <milliseconds>819</milliseconds>
-    </settings>
-    <timestamp>06/14/2014 15:03:28</timestamp>
-    <milliseconds>544</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="CallExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>09/07/2013 19:20:47</timestamp>
@@ -210,4 +198,16 @@
     <milliseconds>512</milliseconds>
     <violations />
   </sourcecode>
+  <sourcecode name="CollectionObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>09/07/2013 19:20:47</timestamp>
+      <milliseconds>819</milliseconds>
+    </settings>
+    <timestamp>06/17/2014 09:34:55</timestamp>
+    <milliseconds>506</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="-691438917">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

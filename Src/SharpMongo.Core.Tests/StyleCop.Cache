@@ -27,15 +27,6 @@
     <milliseconds>686</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="CollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:32:22</timestamp>
-      <milliseconds>879</milliseconds>
-    </settings>
-    <timestamp>06/14/2014 14:45:11</timestamp>
-    <milliseconds>717</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="DynamicDocumentTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:32:22</timestamp>
@@ -61,6 +52,15 @@
     </settings>
     <timestamp>06/14/2014 15:04:57</timestamp>
     <milliseconds>658</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="CollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:32:22</timestamp>
+      <milliseconds>879</milliseconds>
+    </settings>
+    <timestamp>11/30/2014 19:40:58</timestamp>
+    <milliseconds>497</milliseconds>
     <violations />
   </sourcecode>
   <project key="1875141538">

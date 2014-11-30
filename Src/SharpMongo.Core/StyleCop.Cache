@@ -36,9 +36,6 @@
     <milliseconds>739</milliseconds>
     <violations />
   </sourcecode>
-  <project key="-1496882163">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="DynamicDocument.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:20:18</timestamp>
@@ -46,15 +43,6 @@
     </settings>
     <timestamp>09/09/2013 21:12:01</timestamp>
     <milliseconds>722</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Collection.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:20:18</timestamp>
-      <milliseconds>117</milliseconds>
-    </settings>
-    <timestamp>06/14/2014 14:57:07</timestamp>
-    <milliseconds>540</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="DynamicObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -66,4 +54,16 @@
     <milliseconds>246</milliseconds>
     <violations />
   </sourcecode>
+  <sourcecode name="Collection.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:20:18</timestamp>
+      <milliseconds>117</milliseconds>
+    </settings>
+    <timestamp>11/30/2014 19:40:58</timestamp>
+    <milliseconds>497</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="-1496882163">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>
