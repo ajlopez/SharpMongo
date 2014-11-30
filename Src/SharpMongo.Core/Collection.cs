@@ -71,8 +71,6 @@
         {
             if (projection != null)
             {
-                IEnumerable<string> names = projection.GetMemberNames();
-
                 if (query == null)
                     foreach (var document in this.documents)
                         yield return document.Project(projection);
