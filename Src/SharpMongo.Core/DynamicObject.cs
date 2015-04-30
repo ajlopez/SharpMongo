@@ -43,8 +43,15 @@
         public bool Match(DynamicObject document)
         {
             foreach (var key in this.values.Keys)
+            {
+                var value = this.values[key];
+
+                if (value is DynamicObject)
+                    return ((DynamicObject)value).Match(document.GetMember(key));
+
                 if (!this.values[key].Equals(document.GetMember(key)))
                     return false;
+            }
 
             return true;
         }
@@ -113,6 +120,19 @@
             builder.Append(" }");
 
             return builder.ToString();
+        }
+
+        private bool Match(object value)
+        {
+            foreach (var key in this.values.Keys)
+            {
+                if (key == "$lt")
+                    return ((IComparable)value).CompareTo(this.GetMember(key)) < 0;
+
+                return false;
+            }
+
+            return true;
         }
     }
 }
