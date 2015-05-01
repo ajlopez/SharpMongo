@@ -80,6 +80,42 @@
         }
 
         [TestMethod]
+        public void MatchOneGreaterThanQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$gt", 700));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchOneGreaterThanQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$gt", 800));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
+        public void InvalidMatchOperator()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$foo", 700));
+
+            try
+            {
+                query.Match(document);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Invalid operator '$foo'", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void DontMatchOnePropertyQuery()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
