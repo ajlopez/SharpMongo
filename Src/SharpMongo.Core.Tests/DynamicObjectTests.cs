@@ -134,6 +134,24 @@
         }
 
         [TestMethod]
+        public void MatchRangeQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$lt", 900, "$gt", 700));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchRangeQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$lt", 800, "$gt", 700));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void InvalidMatchOperator()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);

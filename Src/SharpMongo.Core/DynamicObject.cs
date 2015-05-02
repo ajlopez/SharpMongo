@@ -127,16 +127,28 @@
             foreach (var key in this.values.Keys)
             {
                 if (key == "$lt")
-                    return ((IComparable)value).CompareTo(this.GetMember(key)) < 0;
+                    if (!(((IComparable)value).CompareTo(this.GetMember(key)) < 0))
+                        return false;
+                    else
+                        continue;
 
                 if (key == "$lte")
-                    return ((IComparable)value).CompareTo(this.GetMember(key)) <= 0;
+                    if (!(((IComparable)value).CompareTo(this.GetMember(key)) <= 0))
+                        return false;
+                    else
+                        continue;
 
                 if (key == "$gt")
-                    return ((IComparable)value).CompareTo(this.GetMember(key)) > 0;
+                    if (!(((IComparable)value).CompareTo(this.GetMember(key)) > 0))
+                        return false;
+                    else
+                        continue;
 
                 if (key == "$gte")
-                    return ((IComparable)value).CompareTo(this.GetMember(key)) >= 0;
+                    if (!(((IComparable)value).CompareTo(this.GetMember(key)) >= 0))
+                        return false;
+                    else
+                        continue;
 
                 throw new InvalidOperationException(string.Format("Invalid operator '{0}'", key));
             }
