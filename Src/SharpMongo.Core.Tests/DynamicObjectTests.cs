@@ -80,6 +80,24 @@
         }
 
         [TestMethod]
+        public void MatchOneLessOrEqualThanQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$lte", 800));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchOneLessOrEqualThanQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$lte", 700));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void MatchOneGreaterThanQuery()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
@@ -93,6 +111,24 @@
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
             DynamicObject query = new DynamicObject("Age", new DynamicObject("$gt", 800));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
+        public void MatchOneGreaterOrEqualThanQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$gte", 800));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchOneGreaterOrEqualThanQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$gte", 801));
 
             Assert.IsFalse(query.Match(document));
         }

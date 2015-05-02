@@ -129,8 +129,14 @@
                 if (key == "$lt")
                     return ((IComparable)value).CompareTo(this.GetMember(key)) < 0;
 
+                if (key == "$lte")
+                    return ((IComparable)value).CompareTo(this.GetMember(key)) <= 0;
+
                 if (key == "$gt")
                     return ((IComparable)value).CompareTo(this.GetMember(key)) > 0;
+
+                if (key == "$gte")
+                    return ((IComparable)value).CompareTo(this.GetMember(key)) >= 0;
 
                 throw new InvalidOperationException(string.Format("Invalid operator '{0}'", key));
             }
