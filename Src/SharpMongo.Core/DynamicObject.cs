@@ -156,6 +156,12 @@
                     else
                         continue;
 
+                if (key == "$eq")
+                    if (!value.Equals(this.GetMember(key)))
+                        return false;
+                    else
+                        continue;
+
                 throw new InvalidOperationException(string.Format("Invalid operator '{0}'", key));
             }
 
