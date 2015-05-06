@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Collections;
 
     public class DynamicObject : SharpMongo.Core.IObject
     {
@@ -158,6 +159,12 @@
 
                 if (key == "$eq")
                     if (!value.Equals(this.GetMember(key)))
+                        return false;
+                    else
+                        continue;
+
+                if (key == "$in")
+                    if (!(((IList)this.GetMember(key)).Contains(value)))
                         return false;
                     else
                         continue;

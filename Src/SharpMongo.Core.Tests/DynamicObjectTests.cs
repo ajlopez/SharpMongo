@@ -182,7 +182,25 @@
         public void NoMatchEqualQuery()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
-            DynamicObject query = new DynamicObject("Age", new DynamicObject("$eq", 900));
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$eq", 700));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
+        public void MatchInQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$in", new int[] { 700, 600, 800, 900 }));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchInQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$in", new int[] { 700, 600, 801, 900 }));
 
             Assert.IsFalse(query.Match(document));
         }
