@@ -169,6 +169,12 @@
                     else
                         continue;
 
+                if (key == "$nin")
+                    if (((IList)this.GetMember(key)).Contains(value))
+                        return false;
+                    else
+                        continue;
+
                 throw new InvalidOperationException(string.Format("Invalid operator '{0}'", key));
             }
 

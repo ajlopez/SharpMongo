@@ -206,6 +206,24 @@
         }
 
         [TestMethod]
+        public void MatchNotInQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$nin", new int[] { 700, 600, 900 }));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchNotInQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$nin", new int[] { 700, 600, 800, 900 }));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void InvalidMatchOperator()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
