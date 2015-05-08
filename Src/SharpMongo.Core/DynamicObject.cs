@@ -175,6 +175,12 @@
                     else
                         continue;
 
+                if (key == "$not")
+                    if (((DynamicObject)this.GetMember(key)).Match(value))
+                        return false;
+                    else
+                        continue;
+
                 throw new InvalidOperationException(string.Format("Invalid operator '{0}'", key));
             }
 
