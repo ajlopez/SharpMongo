@@ -181,6 +181,14 @@
                     else
                         continue;
 
+                if (key == "$or")
+                {
+                    foreach (var dynobj in (IEnumerable<DynamicObject>)this.GetMember(key))
+                        if (dynobj.Match(value))
+                            return true;
+                    return false;
+                }
+
                 throw new InvalidOperationException(string.Format("Invalid operator '{0}'", key));
             }
 
