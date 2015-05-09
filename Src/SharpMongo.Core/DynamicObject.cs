@@ -1,10 +1,10 @@
 ﻿namespace SharpMongo.Core
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Collections;
 
     public class DynamicObject : SharpMongo.Core.IObject
     {
@@ -164,7 +164,7 @@
                         continue;
 
                 if (key == "$in")
-                    if (!(((IList)this.GetMember(key)).Contains(value)))
+                    if (!((IList)this.GetMember(key)).Contains(value))
                         return false;
                     else
                         continue;
