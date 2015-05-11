@@ -260,6 +260,24 @@
         }
 
         [TestMethod]
+        public void MatchNorQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$nor", new DynamicObject[] { new DynamicObject("$gt", 900), new DynamicObject("$lt", 700) }));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchNorQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$nor", new DynamicObject[] { new DynamicObject("$gt", 900), new DynamicObject("$lt", 1000) }));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void MatchAndQuery()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);

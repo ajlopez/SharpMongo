@@ -189,6 +189,14 @@
                     return false;
                 }
 
+                if (key == "$nor")
+                {
+                    foreach (var dynobj in (IEnumerable<DynamicObject>)this.GetMember(key))
+                        if (dynobj.Match(value))
+                            return false;
+                    return true;
+                }
+
                 if (key == "$and")
                 {
                     foreach (var dynobj in (IEnumerable<DynamicObject>)this.GetMember(key))
