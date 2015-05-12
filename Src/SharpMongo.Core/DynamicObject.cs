@@ -30,6 +30,11 @@
             return null;
         }
 
+        public virtual bool Exists(string name)
+        {
+            return this.values.ContainsKey(name);
+        }
+
         public virtual void SetMember(string name, object value)
         {
             if (this.@sealed)
