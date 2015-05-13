@@ -306,6 +306,60 @@
         }
 
         [TestMethod]
+        public void MatchExistsTrueQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$exists", true));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchExistsTrueQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Weight", new DynamicObject("$exists", true));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
+        public void MatchExistsTrueQueryOnNull()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", null);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$exists", true));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchExistsFalseQueryOnNull()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", null);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$exists", false));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
+        public void MatchExistsFalseQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Weight", new DynamicObject("$exists", false));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchExistsFalseQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$exists", false));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void InvalidMatchOperator()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
