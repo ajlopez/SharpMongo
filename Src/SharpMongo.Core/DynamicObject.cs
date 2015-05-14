@@ -53,7 +53,7 @@
                 var value = this.values[key];
 
                 if (value is DynamicObject)
-                    return ((DynamicObject)value).Match(document.GetMember(key));
+                    return ((DynamicObject)value).Match(document, key);
 
                 if (!this.values[key].Equals(document.GetMember(key)))
                     return false;
@@ -128,10 +128,18 @@
             return builder.ToString();
         }
 
-        private bool Match(object value)
+        private bool Match(DynamicObject dynobj, string name)
         {
+            var value = dynobj.GetMember(name);
+
             foreach (var key in this.values.Keys)
             {
+                if (key == "$exists")
+                    if (!(dynobj.Exists(name).Equals(this.GetMember(key))))
+                        return false;
+                    else
+                        continue;
+
                 if (key == "$lt")
                     if (!(((IComparable)value).CompareTo(this.GetMember(key)) < 0))
                         return false;
@@ -181,31 +189,31 @@
                         continue;
 
                 if (key == "$not")
-                    if (((DynamicObject)this.GetMember(key)).Match(value))
+                    if (((DynamicObject)this.GetMember(key)).Match(dynobj, name))
                         return false;
                     else
                         continue;
 
                 if (key == "$or")
                 {
-                    foreach (var dynobj in (IEnumerable<DynamicObject>)this.GetMember(key))
-                        if (dynobj.Match(value))
+                    foreach (var dobj in (IEnumerable<DynamicObject>)this.GetMember(key))
+                        if (dobj.Match(dynobj, name))
                             return true;
                     return false;
                 }
 
                 if (key == "$nor")
                 {
-                    foreach (var dynobj in (IEnumerable<DynamicObject>)this.GetMember(key))
-                        if (dynobj.Match(value))
+                    foreach (var dobj in (IEnumerable<DynamicObject>)this.GetMember(key))
+                        if (dobj.Match(dynobj, name))
                             return false;
                     return true;
                 }
 
                 if (key == "$and")
                 {
-                    foreach (var dynobj in (IEnumerable<DynamicObject>)this.GetMember(key))
-                        if (!dynobj.Match(value))
+                    foreach (var dobj in (IEnumerable<DynamicObject>)this.GetMember(key))
+                        if (!dobj.Match(dynobj, name))
                             return false;
                     return true;
                 }
