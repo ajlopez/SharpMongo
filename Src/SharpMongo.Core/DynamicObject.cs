@@ -207,7 +207,7 @@
                     foreach (var dobj in (IEnumerable<DynamicObject>)this.GetMember(key))
                         if (dobj.Match(dynobj, name))
                             return false;
-                    return true;
+                    continue;
                 }
 
                 if (key == "$and")
@@ -215,7 +215,17 @@
                     foreach (var dobj in (IEnumerable<DynamicObject>)this.GetMember(key))
                         if (!dobj.Match(dynobj, name))
                             return false;
-                    return true;
+                    continue;
+                }
+
+                if (key == "$type")
+                {
+                    Type type = (Type)this.GetMember(key);
+
+                    if (!type.IsInstanceOfType(value))
+                        return false;
+
+                    continue;
                 }
 
                 throw new InvalidOperationException(string.Format("Invalid operator '{0}'", key));

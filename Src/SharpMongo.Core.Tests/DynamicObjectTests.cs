@@ -361,6 +361,42 @@
         }
 
         [TestMethod]
+        public void MatchTypeStringQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Name", new DynamicObject("$type", typeof(string)));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void MatchTypeIntQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$type", typeof(int)));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchTypeIntQuery()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Name", new DynamicObject("$type", typeof(int)));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
+        public void NoMatchTypeIntQueryUndefinedProperty()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Weight", new DynamicObject("$type", typeof(int)));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void InvalidMatchOperator()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
