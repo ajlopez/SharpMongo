@@ -196,10 +196,18 @@
 
                 if (key == "$or")
                 {
+                    bool result = false;
                     foreach (var dobj in (IEnumerable<DynamicObject>)this.GetMember(key))
                         if (dobj.Match(dynobj, name))
-                            return true;
-                    return false;
+                        {
+                            result = true;
+                            break;
+                        }
+
+                    if (!result)
+                        return false;
+
+                    continue;
                 }
 
                 if (key == "$nor")
