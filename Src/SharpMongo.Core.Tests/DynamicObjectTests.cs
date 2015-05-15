@@ -52,6 +52,7 @@
             Assert.AreEqual("Eve", document.GetMember("Name"));
         }
 
+        [TestMethod]
         public void Exists()
         {
             DynamicObject dynobj = new DynamicObject("Name", "Adam", "Age", 800, "Mother", null);
