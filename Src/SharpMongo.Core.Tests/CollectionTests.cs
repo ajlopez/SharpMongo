@@ -305,5 +305,50 @@
             Collection collection = new Collection("Test");
             Assert.AreEqual(0, collection.Count());
         }
+
+        [TestMethod]
+        public void AggregateAllDocuments()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate();
+
+            Assert.AreEqual(3, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Adam", dynobj.GetMember("Name"));
+            Assert.AreEqual(800, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+
+            dynobj = result.Skip(1).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Eve", dynobj.GetMember("Name"));
+            Assert.AreEqual(700, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+
+            dynobj = result.Skip(2).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Abel", dynobj.GetMember("Name"));
+            Assert.AreEqual(600, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+        }
+
+        private static Collection GetCollection()
+        {
+            Collection collection = new Collection("Test");
+            DynamicDocument document1 = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument document2 = new DynamicDocument("Name", "Eve", "Age", 700);
+            DynamicDocument document3 = new DynamicDocument("Name", "Abel", "Age", 600);
+
+            collection.Insert(document1);
+            collection.Insert(document2);
+            collection.Insert(document3);
+
+            return collection;
+        }
     }
 }

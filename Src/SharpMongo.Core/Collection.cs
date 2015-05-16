@@ -91,6 +91,11 @@
             }
         }
 
+        public IEnumerable<DynamicObject> Aggregate()
+        {
+            return this.Find();
+        }
+
         public void Update(DynamicObject query, DynamicObject update, bool multi = false)
         {
             foreach (var document in this.Find(query))
