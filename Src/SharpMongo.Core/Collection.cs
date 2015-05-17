@@ -91,9 +91,14 @@
             }
         }
 
-        public IEnumerable<DynamicObject> Aggregate()
+        public IEnumerable<DynamicObject> Aggregate(DynamicObject spec = null)
         {
-            return this.Find();
+            if (spec == null)
+                return this.Find();
+
+            int n = (int)spec.GetMember("$limit");
+
+            return this.Find().Take(n);
         }
 
         public void Update(DynamicObject query, DynamicObject update, bool multi = false)

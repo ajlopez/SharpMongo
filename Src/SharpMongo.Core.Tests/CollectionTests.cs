@@ -337,6 +337,30 @@
             Assert.IsTrue(dynobj.Exists("Id"));
         }
 
+        [TestMethod]
+        public void AggregateWithLimit()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate(new DynamicObject("$limit", 2));
+
+            Assert.AreEqual(2, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Adam", dynobj.GetMember("Name"));
+            Assert.AreEqual(800, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+
+            dynobj = result.Skip(1).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Eve", dynobj.GetMember("Name"));
+            Assert.AreEqual(700, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+        }
+
         private static Collection GetCollection()
         {
             Collection collection = new Collection("Test");
