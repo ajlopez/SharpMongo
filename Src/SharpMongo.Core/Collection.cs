@@ -93,12 +93,21 @@
 
         public IEnumerable<DynamicObject> Aggregate(DynamicObject spec = null)
         {
-            if (spec == null)
-                return this.Find();
+            if (spec != null && spec.Exists("$limit"))
+            {
+                int n = (int)spec.GetMember("$limit");
 
-            int n = (int)spec.GetMember("$limit");
+                return this.Find().Take(n);
+            }
 
-            return this.Find().Take(n);
+            if (spec != null && spec.Exists("$skip"))
+            {
+                int n = (int)spec.GetMember("$skip");
+
+                return this.Find().Skip(n);
+            }
+
+            return this.Find();
         }
 
         public void Update(DynamicObject query, DynamicObject update, bool multi = false)

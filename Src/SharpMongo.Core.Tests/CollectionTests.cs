@@ -361,6 +361,30 @@
             Assert.IsTrue(dynobj.Exists("Id"));
         }
 
+        [TestMethod]
+        public void AggregateWithSkip()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate(new DynamicObject("$skip", 1));
+
+            Assert.AreEqual(2, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Eve", dynobj.GetMember("Name"));
+            Assert.AreEqual(700, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+
+            dynobj = result.Skip(1).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Abel", dynobj.GetMember("Name"));
+            Assert.AreEqual(600, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+        }
+
         private static Collection GetCollection()
         {
             Collection collection = new Collection("Test");
