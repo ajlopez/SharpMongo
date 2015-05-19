@@ -385,6 +385,23 @@
             Assert.IsTrue(dynobj.Exists("Id"));
         }
 
+        [TestMethod]
+        public void AggregateWithProjectFieldValue()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate(new DynamicObject("$project", new DynamicObject("name", "Adam")));
+
+            Assert.AreEqual(1, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Adam", dynobj.GetMember("Name"));
+            Assert.AreEqual(900, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+        }
+
         private static Collection GetCollection()
         {
             Collection collection = new Collection("Test");
