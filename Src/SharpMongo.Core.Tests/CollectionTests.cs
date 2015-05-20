@@ -390,7 +390,7 @@
         {
             Collection collection = GetCollection();
 
-            var result = collection.Aggregate(new DynamicObject("$project", new DynamicObject("name", "Adam")));
+            var result = collection.Aggregate(new DynamicObject("$project", new DynamicObject("Name", "Adam")));
 
             Assert.AreEqual(1, result.Count());
 
@@ -398,7 +398,7 @@
 
             Assert.IsNotNull(dynobj);
             Assert.AreEqual("Adam", dynobj.GetMember("Name"));
-            Assert.AreEqual(900, dynobj.GetMember("Age"));
+            Assert.AreEqual(800, dynobj.GetMember("Age"));
             Assert.IsTrue(dynobj.Exists("Id"));
         }
 
