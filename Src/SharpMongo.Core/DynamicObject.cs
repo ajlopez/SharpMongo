@@ -135,7 +135,7 @@
             foreach (var key in this.values.Keys)
             {
                 if (key == "$exists")
-                    if (!(dynobj.Exists(name).Equals(this.GetMember(key))))
+                    if (!dynobj.Exists(name).Equals(this.GetMember(key)))
                         return false;
                     else
                         continue;

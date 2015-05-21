@@ -1,8 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <project key="1302139209">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ExpressionCommandTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>09/07/2013 19:22:43</timestamp>
@@ -138,4 +135,7 @@
     <milliseconds>717</milliseconds>
     <violations />
   </sourcecode>
+  <project key="1302139209">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

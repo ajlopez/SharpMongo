@@ -1,8 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <project key="-1496882163">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="DocumentBase.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:20:18</timestamp>
@@ -12,15 +9,6 @@
     <milliseconds>605</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Collection.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:20:18</timestamp>
-      <milliseconds>117</milliseconds>
-    </settings>
-    <timestamp>11/30/2014 19:48:03</timestamp>
-    <milliseconds>164</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="DynamicDocument.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:20:18</timestamp>
@@ -28,15 +16,6 @@
     </settings>
     <timestamp>09/09/2013 21:12:01</timestamp>
     <milliseconds>722</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="DynamicObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:20:18</timestamp>
-      <milliseconds>117</milliseconds>
-    </settings>
-    <timestamp>05/09/2015 09:16:20</timestamp>
-    <milliseconds>506</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="Engine.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -65,5 +44,32 @@
     <timestamp>08/10/2013 20:11:11</timestamp>
     <milliseconds>901</milliseconds>
     <violations />
+  </sourcecode>
+  <project key="-1496882163">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="Collection.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:20:18</timestamp>
+      <milliseconds>117</milliseconds>
+    </settings>
+    <timestamp>05/20/2015 07:17:46</timestamp>
+    <milliseconds>663</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DynamicObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:20:18</timestamp>
+      <milliseconds>117</milliseconds>
+    </settings>
+    <timestamp>05/15/2015 07:27:52</timestamp>
+    <milliseconds>595</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="StatementMustNotUseUnnecessaryParenthesis" ruleCheckId="SA1119">
+        <context>The line contains unnecessary parenthesis.</context>
+        <line>138</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
 </stylecopresultscache>
