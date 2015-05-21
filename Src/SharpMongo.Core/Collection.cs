@@ -114,6 +114,13 @@
                 return this.Find(query);
             }
 
+            if (spec != null && spec.Exists("$project"))
+            {
+                DynamicObject projection = (DynamicObject)spec.GetMember("$project");
+
+                return this.Find(null, projection);
+            }
+
             return this.Find();
         }
 
