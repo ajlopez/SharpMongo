@@ -386,11 +386,11 @@
         }
 
         [TestMethod]
-        public void AggregateWithProjectFieldValue()
+        public void AggregateWithMatchFieldValue()
         {
             Collection collection = GetCollection();
 
-            var result = collection.Aggregate(new DynamicObject("$project", new DynamicObject("Name", "Adam")));
+            var result = collection.Aggregate(new DynamicObject("$match", new DynamicObject("Name", "Adam")));
 
             Assert.AreEqual(1, result.Count());
 

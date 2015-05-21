@@ -107,9 +107,9 @@
                 return this.Find().Skip(n);
             }
 
-            if (spec != null && spec.Exists("$project"))
+            if (spec != null && spec.Exists("$match"))
             {
-                DynamicObject query = (DynamicObject)spec.GetMember("$project");
+                DynamicObject query = (DynamicObject)spec.GetMember("$match");
 
                 return this.Find(query);
             }
