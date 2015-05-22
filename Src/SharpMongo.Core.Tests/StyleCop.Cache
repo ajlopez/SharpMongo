@@ -1,5 +1,17 @@
 <stylecopresultscache>
   <version>10</version>
+  <project key="1875141538">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="CollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:32:22</timestamp>
+      <milliseconds>879</milliseconds>
+    </settings>
+    <timestamp>05/21/2015 06:41:27</timestamp>
+    <milliseconds>761</milliseconds>
+    <violations />
+  </sourcecode>
   <sourcecode name="DocumentBaseTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:32:22</timestamp>
@@ -36,27 +48,6 @@
     <milliseconds>78</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:32:22</timestamp>
-      <milliseconds>879</milliseconds>
-    </settings>
-    <timestamp>08/10/2013 20:11:40</timestamp>
-    <milliseconds>164</milliseconds>
-    <violations />
-  </sourcecode>
-  <project key="1875141538">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
-  <sourcecode name="CollectionTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>08/10/2013 20:32:22</timestamp>
-      <milliseconds>879</milliseconds>
-    </settings>
-    <timestamp>05/20/2015 07:18:57</timestamp>
-    <milliseconds>673</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="DynamicObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>08/10/2013 20:32:22</timestamp>
@@ -64,6 +55,15 @@
     </settings>
     <timestamp>05/15/2015 07:21:53</timestamp>
     <milliseconds>544</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>08/10/2013 20:32:22</timestamp>
+      <milliseconds>879</milliseconds>
+    </settings>
+    <timestamp>08/10/2013 20:11:40</timestamp>
+    <milliseconds>164</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

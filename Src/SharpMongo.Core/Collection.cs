@@ -93,35 +93,32 @@
 
         public IEnumerable<DynamicObject> Aggregate(DynamicObject spec = null)
         {
+            DynamicObject query = null;
+            DynamicObject projection = null;
+
+            if (spec != null && spec.Exists("$match"))
+                query = (DynamicObject)spec.GetMember("$match");
+
+            if (spec != null && spec.Exists("$project"))
+                projection = (DynamicObject)spec.GetMember("$project");
+
+            IEnumerable<DynamicObject> result = this.Find(query, projection);
+
             if (spec != null && spec.Exists("$limit"))
             {
                 int n = (int)spec.GetMember("$limit");
 
-                return this.Find().Take(n);
+                result = result.Take(n);
             }
 
             if (spec != null && spec.Exists("$skip"))
             {
                 int n = (int)spec.GetMember("$skip");
 
-                return this.Find().Skip(n);
+                result = result.Skip(n);
             }
 
-            if (spec != null && spec.Exists("$match"))
-            {
-                DynamicObject query = (DynamicObject)spec.GetMember("$match");
-
-                return this.Find(query);
-            }
-
-            if (spec != null && spec.Exists("$project"))
-            {
-                DynamicObject projection = (DynamicObject)spec.GetMember("$project");
-
-                return this.Find(null, projection);
-            }
-
-            return this.Find();
+            return result;
         }
 
         public void Update(DynamicObject query, DynamicObject update, bool multi = false)
