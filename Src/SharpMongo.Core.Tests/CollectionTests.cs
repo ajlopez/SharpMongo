@@ -386,6 +386,23 @@
         }
 
         [TestMethod]
+        public void AggregateWithSkipAndLimit()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate(new DynamicObject("$skip", 1, "$limit", 1));
+
+            Assert.AreEqual(1, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Eve", dynobj.GetMember("Name"));
+            Assert.AreEqual(700, dynobj.GetMember("Age"));
+            Assert.IsTrue(dynobj.Exists("Id"));
+        }
+
+        [TestMethod]
         public void AggregateWithMatchFieldValue()
         {
             Collection collection = GetCollection();

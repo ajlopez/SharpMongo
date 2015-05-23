@@ -104,18 +104,18 @@
 
             IEnumerable<DynamicObject> result = this.Find(query, projection);
 
-            if (spec != null && spec.Exists("$limit"))
-            {
-                int n = (int)spec.GetMember("$limit");
-
-                result = result.Take(n);
-            }
-
             if (spec != null && spec.Exists("$skip"))
             {
                 int n = (int)spec.GetMember("$skip");
 
                 result = result.Skip(n);
+            }
+
+            if (spec != null && spec.Exists("$limit"))
+            {
+                int n = (int)spec.GetMember("$limit");
+
+                result = result.Take(n);
             }
 
             return result;
