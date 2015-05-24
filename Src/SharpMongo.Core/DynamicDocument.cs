@@ -31,7 +31,7 @@
 
             names.Add("Id");
 
-            foreach (var name in projection.GetMemberNames().Where(n => !IsFalse(projection.GetMember(n))))
+            foreach (var name in projection.GetMemberNames().Where(n => IsTrue(projection.GetMember(n))))
                 if (!names.Contains(name))
                     names.Add(name);
 
@@ -47,12 +47,20 @@
             foreach (var name in names)
                 document.SetMember(name, this.GetMember(name));
 
+            foreach (var name in  projection.GetMemberNames().Where(n => !IsFalse(projection.GetMember(n)) && !IsTrue(projection.GetMember(n))))
+                document.SetMember(name, projection.GetMember(name));
+
             return document;
         }
 
         private static bool IsFalse(object value)
         {
-            return value == null || value.Equals(false) || value.Equals(0);
+            return value != null && (value.Equals(false) || value.Equals(0));
+        }
+
+        private static bool IsTrue(object value)
+        {
+            return value != null && (value.Equals(true) || value.Equals(1));
         }
     }
 }

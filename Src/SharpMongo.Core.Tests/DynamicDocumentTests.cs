@@ -43,6 +43,24 @@
         }
 
         [TestMethod]
+        public void ProjectNewField()
+        {
+            DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument projection = new DynamicDocument("NewField", 1000);
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("NewField"));
+            Assert.AreEqual(1000, result.GetMember("NewField"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
         public void ProjectExcludingAge()
         {
             DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
