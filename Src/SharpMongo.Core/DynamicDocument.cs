@@ -1,6 +1,7 @@
 ﻿namespace SharpMongo.Core
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -48,9 +49,41 @@
                 document.SetMember(name, this.GetMember(name));
 
             foreach (var name in  projection.GetMemberNames().Where(n => !IsFalse(projection.GetMember(n)) && !IsTrue(projection.GetMember(n))))
-                document.SetMember(name, projection.GetMember(name));
+                document.SetMember(name, this.Evaluate(projection.GetMember(name)));
 
             return document;
+        }
+
+        private object Evaluate(object value)
+        {
+            if (!(value is DynamicObject))
+                return value;
+
+            var dynobj = (DynamicObject)value;
+
+            if (dynobj.Exists("$eq"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$eq");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return value1.Equals(value2);
+            }
+
+            return null;
+        }
+
+        private object GetValue(object value)
+        {
+            if (value is string)
+            {
+                string name = (string)value;
+
+                if (name.Length > 0 && name[0] == '$')
+                    return this.GetMember(name.Substring(1));
+            }
+
+            return value;
         }
 
         private static bool IsFalse(object value)
