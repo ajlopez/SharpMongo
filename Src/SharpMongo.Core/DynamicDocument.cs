@@ -70,6 +70,15 @@
                 return value1.Equals(value2);
             }
 
+            if (dynobj.Exists("$ne"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$ne");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return !value1.Equals(value2);
+            }
+
             return null;
         }
 
