@@ -79,6 +79,15 @@
                 return !value1.Equals(value2);
             }
 
+            if (dynobj.Exists("$lt"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$lt");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return ((IComparable)value1).CompareTo(value2) < 0;
+            }
+
             return null;
         }
 
