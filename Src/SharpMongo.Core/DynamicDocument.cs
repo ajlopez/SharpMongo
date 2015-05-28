@@ -88,6 +88,15 @@
                 return ((IComparable)value1).CompareTo(value2) < 0;
             }
 
+            if (dynobj.Exists("$gt"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$gt");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return ((IComparable)value1).CompareTo(value2) > 0;
+            }
+
             return null;
         }
 
