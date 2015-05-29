@@ -133,6 +133,24 @@
         }
 
         [TestMethod]
+        public void ProjectNewFieldWithExpressionGreaterThanOrEqual()
+        {
+            DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
+            DynamicDocument projection = new DynamicDocument("GreaterThanOrEqual800", new DynamicDocument("$gte", new object[] { "$Age", 800 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("GreaterThanOrEqual800"));
+            Assert.AreEqual(true, result.GetMember("GreaterThanOrEqual800"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
         public void ProjectExcludingAge()
         {
             DynamicDocument document = new DynamicDocument("Name", "Adam", "Age", 800);
