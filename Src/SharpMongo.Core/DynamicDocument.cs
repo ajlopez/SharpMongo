@@ -115,6 +115,15 @@
                 return ((IComparable)value1).CompareTo(value2) >= 0;
             }
 
+            if (dynobj.Exists("$cmp"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$cmp");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return ((IComparable)value1).CompareTo(value2);
+            }
+
             return null;
         }
 

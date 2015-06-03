@@ -445,6 +445,34 @@
         }
 
         [TestMethod]
+        public void AggregateWithProjectExpressionUsingCmp()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate(new DynamicObject("$project", new DynamicObject("Compare", new DynamicDocument("$cmp", new object[] { "$Age", 700 }))));
+
+            Assert.AreEqual(3, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual(800, dynobj.GetMember("Age"));
+            Assert.AreEqual(1, dynobj.GetMember("Compare"));
+
+            dynobj = result.Skip(1).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual(700, dynobj.GetMember("Age"));
+            Assert.AreEqual(0, dynobj.GetMember("Compare"));
+
+            dynobj = result.Skip(2).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual(600, dynobj.GetMember("Age"));
+            Assert.AreEqual(-1, dynobj.GetMember("Compare"));
+        }
+
+        [TestMethod]
         public void AggregateWithProjectFieldTrue()
         {
             Collection collection = GetCollection();
