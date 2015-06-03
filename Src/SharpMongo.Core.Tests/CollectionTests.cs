@@ -420,6 +420,31 @@
         }
 
         [TestMethod]
+        public void AggregateWithProjectExpression()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate(new DynamicObject("$project", new DynamicObject("NewField", 100)));
+
+            Assert.AreEqual(3, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual(100, dynobj.GetMember("NewField"));
+
+            dynobj = result.Skip(1).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual(100, dynobj.GetMember("NewField"));
+
+            dynobj = result.Skip(2).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual(100, dynobj.GetMember("NewField"));
+        }
+
+        [TestMethod]
         public void AggregateWithProjectFieldTrue()
         {
             Collection collection = GetCollection();
