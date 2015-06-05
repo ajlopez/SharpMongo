@@ -130,7 +130,7 @@
 
         public DynamicObject Project(DynamicObject projection)
         {
-            IList<string> names = GetInitialNames();
+            IList<string> names = this.GetInitialNames();
 
             return this.Project(projection, names);
         }
@@ -169,6 +169,16 @@
                 document.SetMember(name, this.Evaluate(projection.GetMember(name)));
 
             return document;
+        }
+
+        private static bool IsFalse(object value)
+        {
+            return value != null && (value.Equals(false) || value.Equals(0));
+        }
+
+        private static bool IsTrue(object value)
+        {
+            return value != null && (value.Equals(true) || value.Equals(1));
         }
 
         private bool Match(DynamicObject dynobj, string name)
@@ -369,16 +379,6 @@
             }
 
             return value;
-        }
-
-        private static bool IsFalse(object value)
-        {
-            return value != null && (value.Equals(false) || value.Equals(0));
-        }
-
-        private static bool IsTrue(object value)
-        {
-            return value != null && (value.Equals(true) || value.Equals(1));
         }
     }
 }
