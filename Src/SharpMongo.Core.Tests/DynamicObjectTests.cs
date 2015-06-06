@@ -492,5 +492,147 @@
             Assert.IsNotNull(result);
             Assert.AreEqual("{ }", result);
         }
+
+        [TestMethod]
+        public void ProjectNewField()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("NewField", 1000);
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("NewField"));
+            Assert.AreEqual(1000, result.GetMember("NewField"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpression()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("Has800", new DynamicObject("$eq", new object[] { "$Age", 800 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("Has800"));
+            Assert.AreEqual(true, result.GetMember("Has800"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpressionNotEqual()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("HasNot800", new DynamicObject("$ne", new object[] { "$Age", 800 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("HasNot800"));
+            Assert.AreEqual(false, result.GetMember("HasNot800"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpressionLessThan()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("LessThan800", new DynamicObject("$lt", new object[] { "$Age", 800 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("LessThan800"));
+            Assert.AreEqual(false, result.GetMember("LessThan800"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpressionLessThanOrEqual()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("LessThanOrEqual800", new DynamicObject("$lte", new object[] { "$Age", 800 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("LessThanOrEqual800"));
+            Assert.AreEqual(true, result.GetMember("LessThanOrEqual800"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpressionGreaterThan()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("GreaterThan600", new DynamicObject("$gt", new object[] { "$Age", 600 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("GreaterThan600"));
+            Assert.AreEqual(true, result.GetMember("GreaterThan600"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpressionGreaterThanOrEqual()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("GreaterThanOrEqual800", new DynamicObject("$gte", new object[] { "$Age", 800 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("GreaterThanOrEqual800"));
+            Assert.AreEqual(true, result.GetMember("GreaterThanOrEqual800"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectExcludingAge()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("Age", false);
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNull(result.GetMember("Age"));
+            Assert.AreEqual(1, result.GetMemberNames().Count());
+            Assert.AreEqual("Name", result.GetMemberNames().First());
+        }
     }
 }

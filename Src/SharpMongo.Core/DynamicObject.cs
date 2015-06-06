@@ -153,7 +153,7 @@
                 if (!names.Contains(name))
                     names.Add(name);
 
-            if (names.Count == 1)
+            if (names.Count == 0 || (names.Count == 1 && names.First() == "Id"))
                 names = this.GetMemberNames().ToList();
 
             foreach (var name in projection.GetMemberNames().Where(n => IsFalse(projection.GetMember(n))))
