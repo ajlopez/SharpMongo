@@ -5,6 +5,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    
+    using Microsoft.VisualBasic.CompilerServices;
 
     public class DynamicObject : SharpMongo.Core.IObject
     {
@@ -363,6 +365,15 @@
                 var value2 = this.GetValue(values.Skip(1).First());
 
                 return ((IComparable)value1).CompareTo(value2);
+            }
+
+            if (dynobj.Exists("$add"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$add");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return Operators.AddObject(value1, value2);
             }
 
             return null;
