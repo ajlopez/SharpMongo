@@ -373,7 +373,12 @@
                 var value1 = this.GetValue(values.First());
                 var value2 = this.GetValue(values.Skip(1).First());
 
-                return Operators.AddObject(value1, value2);
+                var result = Operators.AddObject(value1, value2);
+
+                foreach (var val in values.Skip(2))
+                    result = Operators.AddObject(result, this.GetValue(val));
+
+                return result;
             }
 
             return null;

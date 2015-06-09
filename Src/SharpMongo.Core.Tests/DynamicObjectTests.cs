@@ -656,6 +656,24 @@
         }
 
         [TestMethod]
+        public void ProjectNewFieldWithExpressionAddManyNumbersField()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("NewAge", new DynamicObject("$add", new object[] { 1, 2, 3, "$Age" }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("NewAge"));
+            Assert.AreEqual(806, result.GetMember("NewAge"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
         public void ProjectExcludingAge()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
