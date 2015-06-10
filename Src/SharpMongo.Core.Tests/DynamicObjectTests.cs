@@ -674,6 +674,42 @@
         }
 
         [TestMethod]
+        public void ProjectNewFieldWithExpressionSubtractFieldNumber()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("PreviousAge", new DynamicObject("$subtract", new object[] { "$Age", 1 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("PreviousAge"));
+            Assert.AreEqual(799, result.GetMember("PreviousAge"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpressionSubtractNumberField()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("PreviousAge", new DynamicObject("$subtract", new object[] { 1, "$Age" }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("PreviousAge"));
+            Assert.AreEqual(-799, result.GetMember("PreviousAge"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
         public void ProjectExcludingAge()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);

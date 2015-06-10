@@ -381,6 +381,14 @@
                 return result;
             }
 
+            if (dynobj.Exists("$subtract"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$subtract");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return Operators.SubtractObject(value1, value2);
+            }
             return null;
         }
 
