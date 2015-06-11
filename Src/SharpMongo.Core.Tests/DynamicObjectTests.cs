@@ -710,6 +710,42 @@
         }
 
         [TestMethod]
+        public void ProjectNewFieldWithExpressionMultiplyFieldNumber()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("DoubleAge", new DynamicObject("$multiply", new object[] { "$Age", 2 }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("DoubleAge"));
+            Assert.AreEqual(1600, result.GetMember("DoubleAge"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithExpressionMultiplyNumberField()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("DoubleAge", new DynamicObject("$multiply", new object[] { 2, "$Age" }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("DoubleAge"));
+            Assert.AreEqual(1600, result.GetMember("DoubleAge"));
+            Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
         public void ProjectExcludingAge()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);

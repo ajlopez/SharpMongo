@@ -389,6 +389,16 @@
 
                 return Operators.SubtractObject(value1, value2);
             }
+
+            if (dynobj.Exists("$multiply"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$multiply");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return Operators.MultiplyObject(value1, value2);
+            }
+
             return null;
         }
 
