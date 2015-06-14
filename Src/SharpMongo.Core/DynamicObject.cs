@@ -396,7 +396,12 @@
                 var value1 = this.GetValue(values.First());
                 var value2 = this.GetValue(values.Skip(1).First());
 
-                return Operators.MultiplyObject(value1, value2);
+                var result = Operators.MultiplyObject(value1, value2);
+
+                foreach (var val in values.Skip(2))
+                    result = Operators.MultiplyObject(result, this.GetValue(val));
+
+                return result;
             }
 
             return null;
