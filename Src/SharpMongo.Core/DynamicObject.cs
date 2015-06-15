@@ -404,6 +404,15 @@
                 return result;
             }
 
+            if (dynobj.Exists("$divide"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$divide");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return Operators.DivideObject(value1, value2);
+            }
+
             return null;
         }
 
