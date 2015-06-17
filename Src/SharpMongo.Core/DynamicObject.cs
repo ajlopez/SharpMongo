@@ -413,6 +413,15 @@
                 return Operators.DivideObject(value1, value2);
             }
 
+            if (dynobj.Exists("$mod"))
+            {
+                var values = (IEnumerable<object>)dynobj.GetMember("$mod");
+                var value1 = this.GetValue(values.First());
+                var value2 = this.GetValue(values.Skip(1).First());
+
+                return Operators.ModObject(value1, value2);
+            }
+
             return null;
         }
 
