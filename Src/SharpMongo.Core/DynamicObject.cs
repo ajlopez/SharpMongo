@@ -435,6 +435,9 @@
                     return this.GetMember(name.Substring(1));
             }
 
+            if (value is DynamicObject)
+                return this.Evaluate(value);
+
             return value;
         }
     }
