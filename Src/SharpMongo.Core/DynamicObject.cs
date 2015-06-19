@@ -306,20 +306,14 @@
 
             if (dynobj.Exists("$eq"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$eq");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
-
-                return value1.Equals(value2);
+                var values = this.GetValues(dynobj, "$eq");
+                return values[0].Equals(values[1]);
             }
 
             if (dynobj.Exists("$ne"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$ne");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
-
-                return !value1.Equals(value2);
+                var values = this.GetValues(dynobj, "$ne");
+                return !values[0].Equals(values[1]);
             }
 
             if (dynobj.Exists("$lt"))
@@ -439,6 +433,17 @@
                 return this.Evaluate(value);
 
             return value;
+        }
+
+        private IList<object> GetValues(DynamicObject dynobj, string name)
+        {
+            var vals = (IEnumerable<object>)dynobj.GetMember(name);
+            IList<object> values = new List<object>();
+
+            foreach (var val in vals)
+                values.Add(this.GetValue(val));
+
+            return values;
         }
     }
 }
