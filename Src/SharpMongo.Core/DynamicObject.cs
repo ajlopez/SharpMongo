@@ -318,38 +318,30 @@
 
             if (dynobj.Exists("$lt"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$lt");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$lt");
 
-                return ((IComparable)value1).CompareTo(value2) < 0;
+                return ((IComparable)values[0]).CompareTo(values[1]) < 0;
             }
 
             if (dynobj.Exists("$lte"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$lte");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$lte");
 
-                return ((IComparable)value1).CompareTo(value2) <= 0;
+                return ((IComparable)values[0]).CompareTo(values[1]) <= 0;
             }
 
             if (dynobj.Exists("$gt"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$gt");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$gt");
 
-                return ((IComparable)value1).CompareTo(value2) > 0;
+                return ((IComparable)values[0]).CompareTo(values[1]) > 0;
             }
 
             if (dynobj.Exists("$gte"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$gte");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$gte");
 
-                return ((IComparable)value1).CompareTo(value2) >= 0;
+                return ((IComparable)values[0]).CompareTo(values[1]) >= 0;
             }
 
             if (dynobj.Exists("$cmp"))
