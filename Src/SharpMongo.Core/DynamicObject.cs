@@ -346,34 +346,30 @@
 
             if (dynobj.Exists("$cmp"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$cmp");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$cmp");
 
-                return ((IComparable)value1).CompareTo(value2);
+                return ((IComparable)values[0]).CompareTo(values[1]);
             }
 
             if (dynobj.Exists("$add"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$add");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$add");
+                var value1 = values.First();
+                var value2 = values.Skip(1).First();
 
                 var result = Operators.AddObject(value1, value2);
 
                 foreach (var val in values.Skip(2))
-                    result = Operators.AddObject(result, this.GetValue(val));
+                    result = Operators.AddObject(result, val);
 
                 return result;
             }
 
             if (dynobj.Exists("$subtract"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$subtract");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$subtract");
 
-                return Operators.SubtractObject(value1, value2);
+                return Operators.SubtractObject(values[0], values[1]);
             }
 
             if (dynobj.Exists("$multiply"))
