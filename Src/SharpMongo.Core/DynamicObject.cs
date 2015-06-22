@@ -374,25 +374,23 @@
 
             if (dynobj.Exists("$multiply"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$multiply");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$multiply");
+                var value1 = values.First();
+                var value2 = values.Skip(1).First();
 
                 var result = Operators.MultiplyObject(value1, value2);
 
                 foreach (var val in values.Skip(2))
-                    result = Operators.MultiplyObject(result, this.GetValue(val));
+                    result = Operators.MultiplyObject(result, val);
 
                 return result;
             }
 
             if (dynobj.Exists("$divide"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$divide");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$divide");
 
-                return Operators.DivideObject(value1, value2);
+                return Operators.DivideObject(values[0], values[1]);
             }
 
             if (dynobj.Exists("$mod"))
