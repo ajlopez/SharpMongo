@@ -395,11 +395,9 @@
 
             if (dynobj.Exists("$mod"))
             {
-                var values = (IEnumerable<object>)dynobj.GetMember("$mod");
-                var value1 = this.GetValue(values.First());
-                var value2 = this.GetValue(values.Skip(1).First());
+                var values = this.GetValues(dynobj, "$mod");
 
-                return Operators.ModObject(value1, value2);
+                return Operators.ModObject(values[0], values[1]);
             }
 
             return null;
