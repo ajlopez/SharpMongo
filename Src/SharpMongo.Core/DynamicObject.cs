@@ -400,6 +400,13 @@
                 return Operators.ModObject(values[0], values[1]);
             }
 
+            if (dynobj.Exists("$concat"))
+            {
+                var values = this.GetValues(dynobj, "$concat");
+
+                return Operators.ConcatenateObject(values[0], values[1]);
+            }
+
             return null;
         }
 
