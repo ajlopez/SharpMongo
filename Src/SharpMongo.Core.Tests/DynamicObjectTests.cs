@@ -872,7 +872,7 @@
         }
 
         [TestMethod]
-        public void ProjectNewFieldWithConcatExpressions()
+        public void ProjectNewFieldWithConcatExpression()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
             DynamicObject projection = new DynamicObject("FullName", new DynamicObject("$concat", new object[] { "$Name", " Smith" } ));
@@ -887,6 +887,54 @@
             Assert.IsNotNull(result.GetMember("FullName"));
             Assert.AreEqual("Adam Smith", result.GetMember("FullName"));
             Assert.AreEqual(3, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithCmpExpressions()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("EqualName", new DynamicObject("$cmp", new object[] { "$Name", "Adam" })
+                , "GreaterName", new DynamicObject("$cmp", new object[] { "$Name", "Abel" })
+                , "LessName", new DynamicObject("$cmp", new object[] { "$Name", "Eve" }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("EqualName"));
+            Assert.AreEqual(0, result.GetMember("EqualName"));
+            Assert.IsNotNull(result.GetMember("LessName"));
+            Assert.AreEqual(-1, result.GetMember("LessName"));
+            Assert.IsNotNull(result.GetMember("GreaterName"));
+            Assert.AreEqual(1, result.GetMember("GreaterName"));
+            Assert.AreEqual(5, result.GetMemberNames().Count());
+        }
+
+        [TestMethod]
+        public void ProjectNewFieldWithStrCaseCmpExpressions()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject projection = new DynamicObject("EqualName", new DynamicObject("$strcasecmp", new object[] { "$Name", "adam" })
+                , "GreaterName", new DynamicObject("$strcasecmp", new object[] { "$Name", "abel" })
+                , "LessName", new DynamicObject("$strcasecmp", new object[] { "$Name", "eve" }));
+
+            var result = document.Project(projection);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.GetMember("Name"));
+            Assert.AreEqual("Adam", result.GetMember("Name"));
+            Assert.IsNotNull(result.GetMember("Age"));
+            Assert.AreEqual(800, result.GetMember("Age"));
+            Assert.IsNotNull(result.GetMember("EqualName"));
+            Assert.AreEqual(0, result.GetMember("EqualName"));
+            Assert.IsNotNull(result.GetMember("LessName"));
+            Assert.AreEqual(-1, result.GetMember("LessName"));
+            Assert.IsNotNull(result.GetMember("GreaterName"));
+            Assert.AreEqual(1, result.GetMember("GreaterName"));
+            Assert.AreEqual(5, result.GetMemberNames().Count());
         }
 
         [TestMethod]

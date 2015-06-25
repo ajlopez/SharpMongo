@@ -351,6 +351,13 @@
                 return ((IComparable)values[0]).CompareTo(values[1]);
             }
 
+            if (dynobj.Exists("$strcasecmp"))
+            {
+                var values = this.GetValues(dynobj, "$strcasecmp");
+
+                return values[0].ToString().ToLowerInvariant().CompareTo(values[1].ToString().ToLowerInvariant());
+            }
+
             if (dynobj.Exists("$add"))
             {
                 var values = this.GetValues(dynobj, "$add");
