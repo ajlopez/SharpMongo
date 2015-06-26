@@ -414,6 +414,20 @@
                 return Operators.ConcatenateObject(values[0], values[1]);
             }
 
+            if (dynobj.Exists("$tolower"))
+            {
+                var val = this.GetValue(dynobj.GetMember("$tolower"));
+
+                return val.ToString().ToLowerInvariant();
+            }
+
+            if (dynobj.Exists("$toupper"))
+            {
+                var val = this.GetValue(dynobj.GetMember("$toupper"));
+
+                return val.ToString().ToUpperInvariant();
+            }
+
             return null;
         }
 
