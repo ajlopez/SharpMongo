@@ -875,7 +875,7 @@
         public void ProjectNewFieldWithConcatExpression()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
-            DynamicObject projection = new DynamicObject("FullName", new DynamicObject("$concat", new object[] { "$Name", " Smith" } ));
+            DynamicObject projection = new DynamicObject("FullName", new DynamicObject("$concat", new object[] { "$Name", " Smith" }));
 
             var result = document.Project(projection);
 
@@ -893,9 +893,13 @@
         public void ProjectNewFieldWithCmpExpressions()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
-            DynamicObject projection = new DynamicObject("EqualName", new DynamicObject("$cmp", new object[] { "$Name", "Adam" })
-                , "GreaterName", new DynamicObject("$cmp", new object[] { "$Name", "Abel" })
-                , "LessName", new DynamicObject("$cmp", new object[] { "$Name", "Eve" }));
+            DynamicObject projection = new DynamicObject(
+                "EqualName", 
+                new DynamicObject("$cmp", new object[] { "$Name", "Adam" }),
+                "GreaterName", 
+                new DynamicObject("$cmp", new object[] { "$Name", "Abel" }),
+                "LessName", 
+                new DynamicObject("$cmp", new object[] { "$Name", "Eve" }));
 
             var result = document.Project(projection);
 
@@ -917,8 +921,11 @@
         public void ProjectNewFieldWithToUpperToLowerExpressions()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
-            DynamicObject projection = new DynamicObject("NameToUpper", new DynamicObject("$toupper", "$Name")
-                , "NameToLower", new DynamicObject("$tolower", "$Name"));
+            DynamicObject projection = new DynamicObject(
+                "NameToUpper", 
+                new DynamicObject("$toupper", "$Name"), 
+                "NameToLower", 
+                new DynamicObject("$tolower", "$Name"));
 
             var result = document.Project(projection);
 
