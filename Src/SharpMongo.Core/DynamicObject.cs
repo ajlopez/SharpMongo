@@ -428,6 +428,9 @@
                 return val.ToString().ToUpperInvariant();
             }
 
+            if (dynobj.Exists("$literal"))
+                return dynobj.GetMember("$literal");
+
             return null;
         }
 
