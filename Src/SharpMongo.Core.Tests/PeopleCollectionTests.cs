@@ -175,6 +175,49 @@
         }
 
         [TestMethod]
+        public void FindOneWithProjectionWithLiteral()
+        {
+            var result = this.collection.Find(new DynamicObject("Age", 600), new DynamicObject("NewField", new DynamicObject("$literal", "NewValue")));
+
+            Assert.AreEqual(1, result.Count());
+
+            var document = result.First();
+
+            Assert.IsNotNull(document.Id);
+            Assert.AreEqual("Cain", document.GetMember("Name"));
+            Assert.AreEqual(600, document.GetMember("Age"));
+            Assert.AreEqual("NewValue", document.GetMember("NewField"));
+        }
+
+        [TestMethod]
+        public void FindAllWithProjectionWithNewAge()
+        {
+            var result = this.collection.Find(null, new DynamicObject("NewAge", new DynamicObject("$add", new object[] { "$Age", 1 })));
+
+            Assert.AreEqual(4, result.Count());
+
+            var document = result.First();
+
+            Assert.AreEqual(800, document.GetMember("Age"));
+            Assert.AreEqual(801, document.GetMember("NewAge"));
+
+            document = result.Skip(1).First();
+
+            Assert.AreEqual(700, document.GetMember("Age"));
+            Assert.AreEqual(701, document.GetMember("NewAge"));
+
+            document = result.Skip(2).First();
+
+            Assert.AreEqual(600, document.GetMember("Age"));
+            Assert.AreEqual(601, document.GetMember("NewAge"));
+
+            document = result.Skip(3).First();
+
+            Assert.AreEqual(500, document.GetMember("Age"));
+            Assert.AreEqual(501, document.GetMember("NewAge"));
+        }
+
+        [TestMethod]
         public void RemoveCain()
         {
             this.collection.Remove(new DynamicObject("Name", "Cain"));
