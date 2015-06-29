@@ -41,7 +41,7 @@
             if (punctuations.Contains(ch))
                 return new Token(result, TokenType.Punctuation);
 
-            if (char.IsLetter(ch) || ch == '$')
+            if (char.IsLetter(ch) || ch == '$' || ch == '_')
                 return this.NextName(ch);
 
             throw new ParserException(string.Format("Unexpected '{0}'", ch));
