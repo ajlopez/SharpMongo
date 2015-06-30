@@ -53,6 +53,20 @@
         }
 
         [TestMethod]
+        public void GetNameWithTwoInitialSigns()
+        {
+            Lexer lexer = new Lexer("$$add");
+
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("$$add", result.Value);
+            Assert.AreEqual(TokenType.Name, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetNameWithInitialUnderscore()
         {
             Lexer lexer = new Lexer("_add");

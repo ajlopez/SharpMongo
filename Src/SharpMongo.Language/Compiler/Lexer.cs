@@ -51,7 +51,7 @@
         {
             string result = letter.ToString();
 
-            while (this.position < this.length && char.IsLetter(this.text[this.position]))
+            while (this.position < this.length && (char.IsLetter(this.text[this.position]) || this.text[this.position] == '$'))
                 result += this.text[this.position++];
 
             return new Token(result, TokenType.Name);
