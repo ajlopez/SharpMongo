@@ -81,6 +81,20 @@
         }
 
         [TestMethod]
+        public void GetNameWithUnderscore()
+        {
+            Lexer lexer = new Lexer("foo_bar");
+
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo_bar", result.Value);
+            Assert.AreEqual(TokenType.Name, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetNames()
         {
             Lexer lexer = new Lexer("show dbs");
