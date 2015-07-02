@@ -41,17 +41,22 @@
             if (punctuations.Contains(ch))
                 return new Token(result, TokenType.Punctuation);
 
-            if (char.IsLetter(ch) || ch == '$' || ch == '_')
+            if (IsNameCharacter(ch))
                 return this.NextName(ch);
 
             throw new ParserException(string.Format("Unexpected '{0}'", ch));
+        }
+
+        private static bool IsNameCharacter(char ch)
+        {
+            return char.IsLetter(ch) || ch == '$' || ch == '_';
         }
 
         private Token NextName(char letter)
         {
             string result = letter.ToString();
 
-            while (this.position < this.length && (char.IsLetter(this.text[this.position]) || this.text[this.position] == '$' || this.text[this.position] == '_'))
+            while (this.position < this.length && IsNameCharacter(this.text[this.position]))
                 result += this.text[this.position++];
 
             return new Token(result, TokenType.Name);
