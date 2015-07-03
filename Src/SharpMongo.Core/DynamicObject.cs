@@ -10,9 +10,17 @@
 
     public class DynamicObject : SharpMongo.Core.IObject
     {
+        private static Dictionary<string, Func<object, object, object>> operators = new Dictionary<string, Func<object, object, object>>();
+
         private IList<string> names = new List<string>();
         private IDictionary<string, object> values = new Dictionary<string, object>();
         private bool @sealed;
+
+        static DynamicObject()
+        {
+            operators["$subtract"] = Operators.SubtractObject;
+            operators["$divide"] = Operators.DivideObject;
+        }
 
         public DynamicObject(params object[] arguments)
         {
@@ -303,6 +311,13 @@
                 return value;
 
             var dynobj = (DynamicObject)value;
+
+            foreach (string key in dynobj.GetMemberNames())
+                if (operators.ContainsKey(key)) 
+                {
+                    var values = this.GetValues(dynobj, key);
+                    return operators[key](values[0], values[1]);
+                }
 
             if (dynobj.Exists("$eq"))
             {
