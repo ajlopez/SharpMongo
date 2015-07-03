@@ -387,13 +387,6 @@
                 return result;
             }
 
-            if (dynobj.Exists("$subtract"))
-            {
-                var values = this.GetValues(dynobj, "$subtract");
-
-                return Operators.SubtractObject(values[0], values[1]);
-            }
-
             if (dynobj.Exists("$multiply"))
             {
                 var values = this.GetValues(dynobj, "$multiply");
@@ -406,13 +399,6 @@
                     result = Operators.MultiplyObject(result, val);
 
                 return result;
-            }
-
-            if (dynobj.Exists("$divide"))
-            {
-                var values = this.GetValues(dynobj, "$divide");
-
-                return Operators.DivideObject(values[0], values[1]);
             }
 
             if (dynobj.Exists("$mod"))
