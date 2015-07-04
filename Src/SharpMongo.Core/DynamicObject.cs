@@ -20,6 +20,8 @@
         {
             operators["$subtract"] = Operators.SubtractObject;
             operators["$divide"] = Operators.DivideObject;
+            operators["$mod"] = Operators.ModObject;
+            operators["$concat"] = Operators.ConcatenateObject;
         }
 
         public DynamicObject(params object[] arguments)
@@ -399,20 +401,6 @@
                     result = Operators.MultiplyObject(result, val);
 
                 return result;
-            }
-
-            if (dynobj.Exists("$mod"))
-            {
-                var values = this.GetValues(dynobj, "$mod");
-
-                return Operators.ModObject(values[0], values[1]);
-            }
-
-            if (dynobj.Exists("$concat"))
-            {
-                var values = this.GetValues(dynobj, "$concat");
-
-                return Operators.ConcatenateObject(values[0], values[1]);
             }
 
             if (dynobj.Exists("$tolower"))
