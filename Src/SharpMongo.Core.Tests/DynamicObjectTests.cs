@@ -91,6 +91,15 @@
         }
 
         [TestMethod]
+        public void NoMatchOneLessThanQueryUsingExpression()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$lt", new DynamicObject("$add", new object[] { 400, 400 })));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void MatchOneLessOrEqualThanQuery()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);

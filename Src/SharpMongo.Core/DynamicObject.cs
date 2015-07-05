@@ -206,7 +206,7 @@
                         continue;
 
                 if (key == "$lt")
-                    if (!(((IComparable)value).CompareTo(this.GetMember(key)) < 0))
+                    if (!(((IComparable)value).CompareTo(this.Evaluate(this.GetMember(key))) < 0))
                         return false;
                     else
                         continue;
