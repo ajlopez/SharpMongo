@@ -154,10 +154,28 @@
         }
 
         [TestMethod]
+        public void NoMatchOneGreaterThanQueryUsingExpression()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$gt", new DynamicObject("$multiply", new object[] { 500, 2})));
+
+            Assert.IsFalse(query.Match(document));
+        }
+
+        [TestMethod]
         public void MatchOneGreaterOrEqualThanQuery()
         {
             DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
             DynamicObject query = new DynamicObject("Age", new DynamicObject("$gte", 800));
+
+            Assert.IsTrue(query.Match(document));
+        }
+
+        [TestMethod]
+        public void MatchOneGreaterOrEqualThanQueryUsingExpression()
+        {
+            DynamicObject document = new DynamicObject("Name", "Adam", "Age", 800);
+            DynamicObject query = new DynamicObject("Age", new DynamicObject("$gte", new DynamicObject("$add", new object[] { 400, 400 })));
 
             Assert.IsTrue(query.Match(document));
         }
