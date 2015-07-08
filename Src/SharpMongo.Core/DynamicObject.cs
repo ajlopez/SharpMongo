@@ -230,7 +230,7 @@
                         continue;
 
                 if (key == "$ne")
-                    if (value.Equals(this.GetMember(key)))
+                    if (value.Equals(this.Evaluate(this.GetMember(key))))
                         return false;
                     else
                         continue;
