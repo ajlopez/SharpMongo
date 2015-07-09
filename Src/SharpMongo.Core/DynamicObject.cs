@@ -236,7 +236,7 @@
                         continue;
 
                 if (key == "$eq")
-                    if (!value.Equals(this.GetMember(key)))
+                    if (!value.Equals(this.Evaluate(this.GetMember(key))))
                         return false;
                     else
                         continue;
