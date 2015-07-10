@@ -206,37 +206,37 @@
                         continue;
 
                 if (key == "$lt")
-                    if (!(((IComparable)value).CompareTo(this.Evaluate(this.GetMember(key))) < 0))
+                    if (!(((IComparable)value).CompareTo(this.EvaluateMember(key)) < 0))
                         return false;
                     else
                         continue;
 
                 if (key == "$lte")
-                    if (!(((IComparable)value).CompareTo(this.Evaluate(this.GetMember(key))) <= 0))
+                    if (!(((IComparable)value).CompareTo(this.EvaluateMember(key)) <= 0))
                         return false;
                     else
                         continue;
 
                 if (key == "$gt")
-                    if (!(((IComparable)value).CompareTo(this.Evaluate(this.GetMember(key))) > 0))
+                    if (!(((IComparable)value).CompareTo(this.EvaluateMember(key)) > 0))
                         return false;
                     else
                         continue;
 
                 if (key == "$gte")
-                    if (!(((IComparable)value).CompareTo(this.Evaluate(this.GetMember(key))) >= 0))
+                    if (!(((IComparable)value).CompareTo(this.EvaluateMember(key)) >= 0))
                         return false;
                     else
                         continue;
 
                 if (key == "$ne")
-                    if (value.Equals(this.Evaluate(this.GetMember(key))))
+                    if (value.Equals(this.EvaluateMember(key)))
                         return false;
                     else
                         continue;
 
                 if (key == "$eq")
-                    if (!value.Equals(this.Evaluate(this.GetMember(key))))
+                    if (!value.Equals(this.EvaluateMember(key)))
                         return false;
                     else
                         continue;
@@ -305,6 +305,11 @@
             }
 
             return true;
+        }
+
+        private object EvaluateMember(string key)
+        {
+            return this.Evaluate(this.GetMember(key));
         }
 
         private object Evaluate(object value)
