@@ -118,6 +118,14 @@
                 result = result.Take(n);
             }
 
+            if (spec != null && spec.Exists("$sort"))
+            {
+                DynamicObject sspec = (DynamicObject)spec.GetMember("$sort");
+                String fldname = sspec.GetMemberNames().First();
+
+                return result.OrderBy(dobj => dobj.GetMember(fldname));
+            }
+
             return result;
         }
 
