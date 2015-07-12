@@ -445,6 +445,31 @@
         }
 
         [TestMethod]
+        public void AggregateWithSortOneDescendingField()
+        {
+            Collection collection = GetCollection();
+
+            var result = collection.Aggregate(new DynamicObject("$sort", new DynamicObject("Name", -1)));
+
+            Assert.AreEqual(3, result.Count());
+
+            var dynobj = result.First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Eve", dynobj.GetMember("Name"));
+
+            dynobj = result.Skip(1).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Adam", dynobj.GetMember("Name"));
+
+            dynobj = result.Skip(2).First();
+
+            Assert.IsNotNull(dynobj);
+            Assert.AreEqual("Abel", dynobj.GetMember("Name"));
+        }
+
+        [TestMethod]
         public void AggregateWithProjectExpression()
         {
             Collection collection = GetCollection();

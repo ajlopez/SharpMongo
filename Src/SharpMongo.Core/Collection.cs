@@ -122,8 +122,12 @@
             {
                 DynamicObject sspec = (DynamicObject)spec.GetMember("$sort");
                 String fldname = sspec.GetMemberNames().First();
+                int order = (int)sspec.GetMember(fldname);
 
-                return result.OrderBy(dobj => dobj.GetMember(fldname));
+                if (order < 0)
+                    return result.OrderByDescending(dobj => dobj.GetMember(fldname));
+                else
+                    return result.OrderBy(dobj => dobj.GetMember(fldname));
             }
 
             return result;
