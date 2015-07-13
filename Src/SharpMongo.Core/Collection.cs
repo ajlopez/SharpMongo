@@ -121,13 +121,15 @@
             if (spec != null && spec.Exists("$sort"))
             {
                 DynamicObject sspec = (DynamicObject)spec.GetMember("$sort");
-                String fldname = sspec.GetMemberNames().First();
-                int order = (int)sspec.GetMember(fldname);
+                string[] fldnames = sspec.GetMemberNames().ToArray();
+                List<int> orders = new List<int>();
 
-                if (order < 0)
-                    return result.OrderByDescending(dobj => dobj.GetMember(fldname));
-                else
-                    return result.OrderBy(dobj => dobj.GetMember(fldname));
+                foreach (var fldname in fldnames)
+                    orders.Add((int)sspec.GetMember(fldname) < 0 ? -1 : 1);
+
+                int[] fldorders = orders.ToArray();
+
+                return result.OrderBy(dobj => dobj, new DynamicObjectComparer(fldnames, fldorders));
             }
 
             return result;
@@ -175,6 +177,39 @@
         public IEnumerable<object> Distinct(string field, DynamicObject query = null)
         {
             return this.Find(query).Select(d => d.GetMember(field)).Distinct();
+        }
+
+        private class DynamicObjectComparer : IComparer<DynamicObject>
+        {
+            private string[] names;
+            private int[] orders;
+            private int size;
+
+            public DynamicObjectComparer(string[] names, int[] orders)
+            {
+                this.names = names;
+                this.orders = orders;
+                this.size = names.Length;
+            }
+
+            public int Compare(DynamicObject x, DynamicObject y)
+            {
+                for (int k = 0; k < this.size; k++)
+                {
+                    string name = this.names[k];
+                    int order =this.orders[k];
+
+                    object value1 = x.GetMember(name);
+                    object value2 = y.GetMember(name);
+
+                    int result = ((IComparable)value1).CompareTo(value2);
+
+                    if (result != 0)
+                        return result * order;
+                }
+
+                return 0;
+            }
         }
     }
 }
