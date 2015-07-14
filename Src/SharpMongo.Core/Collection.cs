@@ -197,7 +197,7 @@
                 for (int k = 0; k < this.size; k++)
                 {
                     string name = this.names[k];
-                    int order =this.orders[k];
+                    int order = this.orders[k];
 
                     object value1 = x.GetMember(name);
                     object value2 = y.GetMember(name);
